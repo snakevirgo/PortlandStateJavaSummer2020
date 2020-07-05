@@ -36,5 +36,12 @@ public class StudentTest
     return new Student(name, new ArrayList<>(), 0.0, "Doesn't matter");
   }
 
+//make sure the toString has a gpa
+  @Test
+  public void toStringContainsGpa(){
+    double gpa = 3.76;
+    Student pat = new Student("Pat", new ArrayList<>(), gpa, "Doesn't matter");
+    assertThat(pat.toString(), containsString("has a GPA of " + gpa));
+  }
 
 }

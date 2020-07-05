@@ -7,8 +7,10 @@ import java.util.ArrayList;
 /**                                                                                 
  * This class is represents a <code>Student</code>.                                 
  */                                                                                 
-public class Student extends Human {                                                
-                                                                                    
+public class Student extends Human {
+
+  private double gpa;
+
   /**                                                                               
    * Creates a new <code>Student</code>                                             
    *                                                                                
@@ -22,8 +24,10 @@ public class Student extends Human {
    * @param gender                                                                  
    *        The student's gender ("male" or "female", or "other", case insensitive)
    */                                                                               
-  public Student(String name, ArrayList<String> classes, double gpa, String gender) {
+  public Student(String name, ArrayList<String> classes, double gpa, String gender)
+  {
     super(name);
+    this.gpa = gpa;
   }
 
   /**                                                                               
@@ -40,7 +44,7 @@ public class Student extends Human {
    */                                                                               
   public String toString() {
    // throw new UnsupportedOperationException("Not implemented yet");
-    return this.getName();
+    return this.getName() + " has a GPA of " + this.gpa;
   }
 
   /**
