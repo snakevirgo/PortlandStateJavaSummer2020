@@ -3,6 +3,13 @@ package edu.pdx.cs410J.yal;
 import edu.pdx.cs410J.AbstractPhoneCall;
 
 public class PhoneCall extends AbstractPhoneCall {
+  private final String callee; // new field callee added
+
+  //constructor
+  public PhoneCall(String callee) {
+    this.callee = callee;
+  }
+
   @Override
   public String getCaller() {
     throw new UnsupportedOperationException("This method is not implemented yet");
@@ -10,7 +17,7 @@ public class PhoneCall extends AbstractPhoneCall {
 
   @Override
   public String getCallee() {
-    return "This method is not implemented yet";
+    return this.callee;
   }
 
   @Override
