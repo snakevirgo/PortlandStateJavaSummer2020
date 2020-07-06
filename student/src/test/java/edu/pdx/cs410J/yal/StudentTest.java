@@ -68,4 +68,15 @@ public class StudentTest
     assertThat(dave.toString(), containsString("and is taking 3 classes"));
   }
 
+  @Test
+  public void studentTaking1ClassHasASingularWord(){
+
+    ArrayList<String>classes = new ArrayList<>();
+    classes.add("English");
+    Student student = new Student("Name", classes, 1.23, "doesn't matter");
+
+    assertThat(student.toString(), containsString("and is taking 1 class:"));
+  }
+
+
 }

@@ -10,6 +10,7 @@ import java.util.ArrayList;
 public class Student extends Human {
 
   private double gpa;
+  private ArrayList<String> classes;
 
   /**                                                                               
    * Creates a new <code>Student</code>                                             
@@ -28,6 +29,7 @@ public class Student extends Human {
   {
     super(name);
     this.gpa = gpa;
+    this.classes = classes;
   }
 
   /**                                                                               
@@ -44,7 +46,9 @@ public class Student extends Human {
    */                                                                               
   public String toString() {
    // throw new UnsupportedOperationException("Not implemented yet");
-    return this.getName() + " has a GPA of " + this.gpa;
+    int numClasses = this.classes.size();
+    return this.getName() + " has a GPA of " + this.gpa + " and is taking " + numClasses
+            + " class" + (numClasses != 1 ? "es" : "") + ": ";
   }
 
   /**
