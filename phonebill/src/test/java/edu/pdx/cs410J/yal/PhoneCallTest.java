@@ -12,25 +12,31 @@ import static org.hamcrest.MatcherAssert.assertThat;
  */
 public class PhoneCallTest {
 
-  @Test(expected = UnsupportedOperationException.class)
-  public void getStartTimeStringNeedsToBeImplemented() {
-    PhoneCall call = new PhoneCall(null);
-    call.getStartTimeString();
-  }
-
-  @Test
-  public void initiallyAllPhoneCallsHaveTheSameCallee() {
-    String callee = "Callee";
-    PhoneCall call = new PhoneCall(callee);
-    assertThat(call.getCallee(), equalTo(callee));
-  }
-
-  @Test
-  public void forProject1ItIsOkayIfGetStartTimeReturnsNull() {
-    PhoneCall call = new PhoneCall(null);
-    assertThat(call.getStartTime(), is(nullValue()));
-  }
+//  @Test(expected = UnsupportedOperationException.class)
+//  public void getStartTimeStringNeedsToBeImplemented() {
+//    PhoneCall call = new PhoneCall(null);
+//    call.getStartTimeString();
+//  }
+//
+//  @Test
+//  public void initiallyAllPhoneCallsHaveTheSameCallee() {
+//    String callee = "Callee";
+//    PhoneCall call = new PhoneCall(callee);
+//    assertThat(call.getCallee(), equalTo(callee));
+//  }
+//
+//  @Test
+//  public void forProject1ItIsOkayIfGetStartTimeReturnsNull() {
+//    PhoneCall call = new PhoneCall(null);
+//    assertThat(call.getStartTime(), is(nullValue()));
+//  }
 
   //validates phone numbers and dates
+  @Test
+  public void getCallerTest(){
+    PhoneCall number1 = new PhoneCall("Andrew", "", "1/15/2020", "1/20/2020");
+    assertThat(number1.getCaller(), equalTo("Andrew"));
+
+  }
   
 }
