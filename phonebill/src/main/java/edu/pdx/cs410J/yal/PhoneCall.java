@@ -3,16 +3,25 @@ package edu.pdx.cs410J.yal;
 import edu.pdx.cs410J.AbstractPhoneCall;
 
 public class PhoneCall extends AbstractPhoneCall {
-  private final String callee; // new field callee added
+  private String callee; // new field callee added
+  private String caller;
+  private String start;
+  private String end;
 
-  //constructor
-  public PhoneCall(String callee) {
+  /**
+   *
+   * @param callee
+   */
+  public PhoneCall(String caller, String callee,String start, String end ) {
+    this.caller = caller;
     this.callee = callee;
+    this.start = start;
+    this.end = end;
   }
 
   @Override
   public String getCaller() {
-    throw new UnsupportedOperationException("This method is not implemented yet");
+    return this.caller;
   }
 
   @Override
