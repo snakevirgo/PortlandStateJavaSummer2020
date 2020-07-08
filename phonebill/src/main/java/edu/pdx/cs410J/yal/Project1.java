@@ -1,43 +1,120 @@
 package edu.pdx.cs410J.yal;
 
+import java.util.ArrayList;
+
 /**
  * The main class for the CS410J Phone Bill Project
  */
 public class Project1 {
-
+  /**
+   * Main function
+   * * @param args
+   */
   public static void main(String[] args) {
-    //PhoneCall call = new PhoneCall(null);  // Refer to one of Dave's classes so that we can be sure it is on the classpath
+    //PhoneCall call = new PhoneCall(null);  // Refer to one of Dave's classes so that we can be sure it is on the classpat
 
-    /*String customer1;
-    String caller1;
-    String callee1;
-    String start1;
-    String end1;
-    String variable = args[8];
 
-    if(args[0] == "-print")
-    {
+    String customer1 = "";
+    String caller1 = "";
+    String callee1 = "";
+    String startDate = "";
+    String startTime = "";
 
-    }
-     */
+    String endDate = "";
+    String endTime = "";
 
- //System.out.println(call);
 
-    if( args.length == 0) {
+     int flagPrint = 0;
+
+    //System.out.println(call);
+
+    if (args.length == 1) {
       System.err.println("Missing command line arguments");
-    }
+      System.exit(1);
+    } else {
+      for (int i = 0; i < args.length; ++i) {
+        String arg = args[i];
+        if (arg.length() < 1) {
+          System.err.println("Unknown command");
+          System.exit(1);
+        } else if (arg.charAt(0) == '-') {
+          String action = arg.substring(1);
+          if(action.equals("print"))
+          {
+            flagPrint = 1;
+          }
+          else if (action.equals("README")) {
+            String readme = "This is readme. Read me more";
+            System.out.println(readme);
+            System.exit(0);
+          }
+        } else {
+              if (args.length - i == 7) {
+                customer1 = args[i];
+                caller1 = args[i + 1];
+                if (checkPhoneNumber(caller1) == 0) {
+                  System.err.println("Caller phone number is malformed.");
+                  System.exit(0);
+                }
+                callee1 = args[i + 2];
+                  if (checkPhoneNumber(callee1) == 0) {
+                    System.err.println("Caller phone number is malformed.");
+                    System.exit(0);
+                  }
+                startDate = args[i + 3];
+                startTime = args[i + 4];
+                endDate = args[i + 5];
+                endTime = args[i + 6];
+                break;
+              }
+              else {
+                System.err.print("The number of arguments is not valid");
+                System.exit(1);
+              }
+        }
+      }
 
-    for(int i = 0; i < args.length; ++i)
-    {
-      System.out.println(args[i]);
-    }
-    /*
+      PhoneCall call = new PhoneCall(caller1, callee1, startDate, startTime, endDate, endTime);
+      ArrayList<PhoneCall> calls = new ArrayList<>();
+      calls.add(call);
+      PhoneBill bill = new PhoneBill(customer1, calls);
+      if (flagPrint == 1) {
+        System.out.println(bill.toString());
+        System.out.println(call.toString());
+      }
+
+      /*
     for (String arg : args) {
       System.out.println(arg);
     }*/
 
-    System.exit(1);
+      System.exit(1);
 
+    }
   }
 
+  /**
+   * This function will check the formation of phone number
+   * @param phoneNumber
+   * @return 0 for malformed phone number, 1 for correct phone number
+   */
+  // "541-512-4564" ["541","512","4564"]
+  private static int checkPhoneNumber(String phoneNumber) {
+    if (phoneNumber.length() != 12) {
+      return 0;
+    }
+    String splittedPhoneNumber[] = phoneNumber.split("-");
+    if (splittedPhoneNumber.length != 3) {
+      return 0;
+    }
+
+    for (String number: splittedPhoneNumber) {
+      try {
+        Integer.parseInt(number);
+      } catch (Exception e) {
+        return 0;
+      }
+    }
+    return 1;
+  }
 }

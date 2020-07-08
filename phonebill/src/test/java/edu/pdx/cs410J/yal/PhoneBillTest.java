@@ -23,7 +23,7 @@ public class PhoneBillTest {
 
     @Test
     public void addPhoneCallTest(){
-        PhoneCall variable = new PhoneCall("Apple", "Orange", "01/02/2020", "01/20/2020");
+        PhoneCall variable = new PhoneCall("Apple", "Orange", "01/02/2020", "13:00:00", "01/20/2020", "13:00:00");
         ArrayList<PhoneCall> calls1 = new ArrayList<>();
         PhoneBill variable2 = new PhoneBill("Banana", calls1);
         variable2.addPhoneCall(variable);  //added phone call to phone bill

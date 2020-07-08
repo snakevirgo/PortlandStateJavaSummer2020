@@ -5,18 +5,22 @@ import edu.pdx.cs410J.AbstractPhoneCall;
 public class PhoneCall extends AbstractPhoneCall {
   private String callee; // new field callee added
   private String caller;
-  private String start;
-  private String end;
+  private String startDate;
+  private String startTime;
+  private String endDate;
+  private String endTime;
 
   /**
    *
    * @param callee
    */
-  public PhoneCall(String caller, String callee,String start, String end ) {
+  public PhoneCall(String caller, String callee,String startDate, String startTime, String endDate, String endTime) {
     this.caller = caller;
     this.callee = callee;
-    this.start = start;
-    this.end = end;
+    this.startDate = startDate;
+    this.startTime = startTime;
+    this.endDate = endDate;
+    this.endTime = endTime;
   }
 
   @Override
@@ -31,11 +35,13 @@ public class PhoneCall extends AbstractPhoneCall {
 
   @Override
   public String getStartTimeString() {
-    throw new UnsupportedOperationException("This method is not implemented yet");
+      return this.startDate + " " + this.startTime;
+//    throw new UnsupportedOperationException("This method is not implemented yet");
   }
 
   @Override
   public String getEndTimeString() {
-    throw new UnsupportedOperationException("This method is not implemented yet");
+      return this.endDate + " " + this.endTime;
+//    throw new UnsupportedOperationException("This method is not implemented yet");
   }
 }
