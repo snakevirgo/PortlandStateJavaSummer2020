@@ -3,7 +3,7 @@ package edu.pdx.cs410J.yal;
 import java.util.ArrayList;
 
 /**
- * The main class for the CS410J Phone Bill Project
+ * The main class for the CS410J Phone Bill Project.
  */
 public class Project1 {
   /**
