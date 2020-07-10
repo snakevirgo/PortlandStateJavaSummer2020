@@ -7,13 +7,17 @@ import java.util.ArrayList;
  */
 public class Project1 {
   /**
-   * Main function
+   * Main function. All the arguments from command are parsed here. The conditional if and else
+   * statements help to put them apart.
+   *
    * * @param args
+   *
+   * return 0 for success and 1 for error
    */
   public static void main(String[] args) {
     //PhoneCall call = new PhoneCall(null);  // Refer to one of Dave's classes so that we can be sure it is on the classpat
 
-
+    //arguments
     String customer1 = "";
     String caller1 = "";
     String callee1 = "";
@@ -22,12 +26,10 @@ public class Project1 {
     String endDate = "";
     String endTime = "";
 
-
+    //flag for print
     int flagPrint = 0;
 
-    //System.out.println(call);
-
-    if (args.length == 0) {
+   if (args.length == 0) {
       System.err.println("Missing command line arguments");
       System.exit(1);
     } else {
@@ -109,8 +111,7 @@ public class Project1 {
   }
 
   /**
-   * This function will check the formation of phone number
-   *
+   * This private function will check the validity format of phone number.
    * @param phoneNumber
    * @return 0 for malformed phone number, 1 for correct phone number
    */
@@ -134,6 +135,12 @@ public class Project1 {
     return 1;
   }
 
+  /**
+   * This private function checks the validity format of the time.
+   * It checks the length and the location of ":" as part of its time format
+   * @param time
+   * @return 0 for malformed time format, 1 for correct time
+   */
   // "541-512-4564" ["541","512","4564"]
   // 1:1 19:31
 
@@ -167,6 +174,13 @@ public class Project1 {
     return 1;
   }
 
+  /**
+   *  This private function checks the validity format of the date.
+   * It checks the length and the location of "/" as part of its date format
+   *
+   * @param date
+   * @return 0 for malformed date format, 1 for correct date
+   */
   private static int checkDate(String date) {
     if (date.length() < 8) {
       return 0;
