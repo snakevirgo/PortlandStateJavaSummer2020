@@ -19,7 +19,6 @@ public class Project1 {
     String callee1 = "";
     String startDate = "";
     String startTime = "";
-
     String endDate = "";
     String endTime = "";
 
@@ -34,15 +33,16 @@ public class Project1 {
     } else {
       for (int i = 0; i < args.length; ++i) {
         String arg = args[i];
-        if (arg.length() < 1) {
-          System.err.println("Unknown command");
-          System.exit(1);
-        } else if (arg.charAt(0) == '-') {
+        if (arg.charAt(0) == '-') {
           String action = arg.substring(1);
           if (action.equals("print")) {
             flagPrint = 1;
           } else if (action.equals("README")) {
-            String readme = "This is readme. Read me more";
+            String readme = "Name: Yan Li. Project 1: The PhoneBill and PhoneCall."
+                    + "The assignment is designed to pass in arguments from the command line to record"
+                    + "brief phone call records indicating the customer name, caller, callee and their timestamps"
+                    + "Time stamps are in month-day-year. In addition, there are two options that are allowed: "
+                    + "-print command prints the description of a phone call, while README command outputs the README.";
             System.out.println(readme);
             System.exit(0);
           }
@@ -62,7 +62,7 @@ public class Project1 {
             startDate = args[i + 3];
             if (checkDate(startDate) == 0) {
               System.err.println("Wrong start date format.");
-              System.exit(1);
+              System.exit(0);
             }
             startTime = args[i + 4];
             if (checkTime(startTime) == 0) {
@@ -81,9 +81,9 @@ public class Project1 {
               System.exit(0);
             }
 
-            break;
+              break;
           } else {
-            System.err.print("The number of arguments is not valid");
+            System.err.print("The number of arguments is not valid.");
             System.exit(1);
           }
         }
@@ -114,7 +114,7 @@ public class Project1 {
    * @param phoneNumber
    * @return 0 for malformed phone number, 1 for correct phone number
    */
-  // "541-512-4564" ["541","512","4564"]
+  // "541-512-4564" splittedPhoneNUmber = ["541","512","4564"]
   private static int checkPhoneNumber(String phoneNumber) {
     if (phoneNumber.length() != 12) {
       return 0;
@@ -123,7 +123,7 @@ public class Project1 {
     if (splittedPhoneNumber.length != 3) {
       return 0;
     }
-
+    // number = "4564"
     for (String number : splittedPhoneNumber) {
       try {
         Integer.parseInt(number);
@@ -141,6 +141,7 @@ public class Project1 {
     if (time.length() < 3 || time.length() > 5) {
       return 0;
     }
+
     String splittedTime[] = time.split(":");
     if (splittedTime.length != 2) {
       return 0;

@@ -23,10 +23,52 @@ public class Project1IT extends InvokeMainTestCase {
    * Tests that invoking the main method with no arguments issues an error
    */
   @Test
-  public void testNoCommandLineArguments() {
+  public void NoCommandLineArgumentsTest() {
     MainMethodResult result = invokeMain();
     assertThat(result.getExitCode(), equalTo(1));
     assertThat(result.getTextWrittenToStandardError(), containsString("Missing command line arguments"));
   }
+
+ /* @Test
+  public void checkSevenArgumentsTest(){
+     MainMethodResult result = invokeMain(Project1.class, "apple","apple", "oragne","1-12-2020","1:30","1-12-2020","1:50");
+     assertThat(result.getTextWrittenToStandardOut(), containsString("The number of arguments is valid") );
+  }
+
+  */
+
+  @Test
+  public void checkInvalidNumberOfArgumentsTest(){
+     MainMethodResult result = invokeMain(Project1.class, "ksi","eis","apple","apple", "orange","1-12-2020","1:30","1-12-2020","1:50");
+     assertThat(result.getTextWrittenToStandardError(), containsString("The number of arguments is not valid.") );
+  }
+
+  @Test
+  public void checkPhoneNumberTest(){
+     MainMethodResult result = invokeMain(Project1.class, "apple","apple", "orange","1-12-2020","1:30","1-12-2020","1:50");
+     assertThat(result.getTextWrittenToStandardError(), containsString("Caller phone number is malformed.") );
+  }
+
+
+ /* @Test
+  public void checkREADMETest(){
+     MainMethodResult result = invokeMain(Project1.class, "-print","-README");
+    // assertThat(result.getExitCode(), equalTo(0));
+     assertThat(result.getTextWrittenToStandardError(), containsString( "Name: Yan Li. Project 1: The PhoneBill and PhoneCall."
+                    + "The assignment is designed to pass in arguments from the command line to record"
+                    + "brief phone call records indicating the customer name, caller, callee and their timestamps"
+                    + "Time stamps are in month-day-year. In addition, there are two options that are allowed: "
+                    + "-print command prints the description of a phone call, while README command outputs the README."));
+
+  }
+
+  */
+  @Test
+  public void checkValidityOfPhoneNumber(){
+     MainMethodResult result = invokeMain();
+
+  }
+
+
 
 }

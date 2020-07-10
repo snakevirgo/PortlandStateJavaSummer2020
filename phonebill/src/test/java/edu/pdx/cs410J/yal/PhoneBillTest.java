@@ -30,6 +30,13 @@ public class PhoneBillTest {
         ArrayList<PhoneCall> array = (ArrayList<PhoneCall>)variable2.getPhoneCalls();
         assertThat(array.get(0), equalTo(variable));
     }
+
+    @Test
+    public void getPhoneCallsTest(){
+         ArrayList<PhoneCall> calls1 = new ArrayList<>();
+         PhoneBill customerName = new PhoneBill("bill", calls1);
+         assertThat(customerName.getPhoneCalls(), equalTo(calls1) );
+    }
     /*
     @Test(expected = UnsupportedOperationException.class)
   public void getStartTimeStringNeedsToBeImplemented() {
