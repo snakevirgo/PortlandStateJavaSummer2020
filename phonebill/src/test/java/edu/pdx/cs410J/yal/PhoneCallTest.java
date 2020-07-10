@@ -34,26 +34,26 @@ public class PhoneCallTest {
   //validates phone numbers and dates
   @Test
   public void getCallerTest(){
-    PhoneCall number1 = new PhoneCall("Andrew", "Macy", "01/15/2020", "12:30", "1/20/2020", "13:30");
-    assertThat(number1.getCaller(), equalTo("Andrew"));
+    PhoneCall number1 = new PhoneCall("503-222-3333", "503-111-1111", "01/15/2020", "12:30", "1/20/2020", "13:30");
+    assertThat(number1.getCaller(), equalTo("503-222-3333"));
 
   }
 
   @Test
   public void getCalleeTest(){
-    PhoneCall number2 = new PhoneCall("Andrew", "Macy", "01-10-2020", "12:30", "01-10-2020", "13:30");
-    assertThat(number2.getCallee(), equalTo("Macy"));
+    PhoneCall number2 = new PhoneCall("503-222-3333", "503-111-1111", "01-10-2020", "12:30", "01-10-2020", "13:30");
+    assertThat(number2.getCallee(), equalTo("503-111-1111"));
   }
 
   @Test
   public void getStartTimeStringTest(){
-    PhoneCall number2 = new PhoneCall("Andrew", "Macy", "01-10-2020", "12:30", "01-10-2020", "13:30");
+    PhoneCall number2 = new PhoneCall("503-222-3333", "503-111-1111", "01-10-2020", "12:30", "01-10-2020", "13:30");
     assertThat(number2.getStartTimeString(), equalTo("01-10-2020 12:30"));
   }
 
   @Test
   public void getEndTimeStringTest(){
-    PhoneCall number2 = new PhoneCall("Andrew", "Macy", "01-10-2020", "12:30", "01-10-2020", "13:30");
+    PhoneCall number2 = new PhoneCall("503-222-3333", "503-111-1111", "01-10-2020", "12:30", "01-10-2020", "13:30");
     assertThat(number2.getEndTimeString(), equalTo("01-10-2020 13:30"));
   }
 
