@@ -45,7 +45,7 @@ public class Project1IT extends InvokeMainTestCase {
 
   @Test
   public void checkCallerPhoneNumberTest(){
-     MainMethodResult result = invokeMain(Project1.class, "aplle","503-222-33333","503-333-2222","1-12-2020","1:30","1-12-2020","1:50");
+     MainMethodResult result = invokeMain(Project1.class, "apple","503-222-33333","503-333-2222","1-12-2020","1:30","1-12-2020","1:50");
      assertThat(result.getTextWrittenToStandardError(), containsString("Caller phone number is malformed.") );
   }
 
