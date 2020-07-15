@@ -8,15 +8,15 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 /**
- * Tests the functionality in the {@link Project1} main class.
+ * Tests the functionality in the {@link Project2} main class.
  */
-public class Project1IT extends InvokeMainTestCase {
+public class Project2IT extends InvokeMainTestCase {
 
     /**
-     * Invokes the main method of {@link Project1} with the given arguments.
+     * Invokes the main method of {@link Project2} with the given arguments.
      */
     private MainMethodResult invokeMain(String... args) {
-        return invokeMain( Project1.class, args );
+        return invokeMain( Project2.class, args );
     }
 
   /**
@@ -39,19 +39,19 @@ public class Project1IT extends InvokeMainTestCase {
 
   @Test
   public void checkInvalidNumberOfArgumentsTest(){
-     MainMethodResult result = invokeMain(Project1.class, "ksi","eis","apple","apple", "orange","1-12-2020","1:30","1-12-2020","1:50");
+     MainMethodResult result = invokeMain(Project2.class, "ksi","eis","apple","apple", "orange","1-12-2020","1:30","1-12-2020","1:50");
      assertThat(result.getTextWrittenToStandardError(), containsString("The number of arguments is not valid.") );
   }
 
   @Test
   public void checkCallerPhoneNumberTest(){
-     MainMethodResult result = invokeMain(Project1.class, "apple","503-222-33333","503-333-2222","1-12-2020","1:30","1-12-2020","1:50");
+     MainMethodResult result = invokeMain(Project2.class, "apple","503-222-33333","503-333-2222","1-12-2020","1:30","1-12-2020","1:50");
      assertThat(result.getTextWrittenToStandardError(), containsString("Caller phone number is malformed.") );
   }
 
   @Test
   public void checkCalleePhoneNumberTest(){
-     MainMethodResult result = invokeMain(Project1.class, "aplle","503-222-3333","503-333-22d22","1-12-2020","1:30","1-12-2020","1:50");
+     MainMethodResult result = invokeMain(Project2.class, "aplle","503-222-3333","503-333-22d22","1-12-2020","1:30","1-12-2020","1:50");
      assertThat(result.getTextWrittenToStandardError(), containsString("Callee phone number is malformed.") );
   }
 
