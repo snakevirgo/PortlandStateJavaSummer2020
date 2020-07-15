@@ -29,14 +29,6 @@ public class Project2IT extends InvokeMainTestCase {
         assertThat(result.getTextWrittenToStandardError(), containsString("Missing command line arguments"));
     }
 
- /* @Test
-  public void checkSevenArgumentsTest(){
-     MainMethodResult result = invokeMain(Project1.class, "apple","apple", "oragne","1-12-2020","1:30","1-12-2020","1:50");
-     assertThat(result.getTextWrittenToStandardOut(), containsString("The number of arguments is valid") );
-  }
-
-  */
-
     @Test
     public void checkInvalidNumberOfArgumentsTest() {
         MainMethodResult result = invokeMain(Project2.class, "ksi", "eis", "apple", "apple", "orange", "1-12-2020", "1:30", "1-12-2020", "1:50");
@@ -125,4 +117,6 @@ public class Project2IT extends InvokeMainTestCase {
     }
 
      */
+
+
 }
