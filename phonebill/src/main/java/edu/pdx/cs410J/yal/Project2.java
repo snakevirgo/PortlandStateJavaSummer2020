@@ -73,33 +73,33 @@ public class Project2 {
             caller1 = args[i + 1];
             if (checkPhoneNumber(caller1) == 0) {
               System.err.println("Caller phone number is malformed.");
-              System.exit(0);
+              System.exit(1);
             }
             callee1 = args[i + 2];
             if (checkPhoneNumber(callee1) == 0) {
               System.err.println("Callee phone number is malformed.");
-              System.exit(0);
+              System.exit(1);
             }
             startDate = args[i + 3];
             if (checkDate(startDate) == 0) {
               System.err.println("Wrong start date format.");
-              System.exit(0);
+              System.exit(1);
             }
             startTime = args[i + 4];
             if (checkTime(startTime) == 0) {
               System.err.println("Wrong start time format.");
-              System.exit(0);
+              System.exit(1);
             }
 
             endDate = args[i + 5];
             if (checkDate(endDate) == 0) {
               System.err.println("Wrong end date format.");
-              System.exit(0);
+              System.exit(1);
             }
             endTime = args[i + 6];
             if (checkTime(endTime) == 0) {
               System.err.println("Wrong end time format.");
-              System.exit(0);
+              System.exit(1);
             }
 
               break;
