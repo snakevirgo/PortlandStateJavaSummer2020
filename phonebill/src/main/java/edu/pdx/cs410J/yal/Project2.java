@@ -1,11 +1,16 @@
 package edu.pdx.cs410J.yal;
 
+import edu.pdx.cs410J.ParserException;
+import org.w3c.dom.Text;
+
+import java.io.IOException;
+import java.text.ParseException;
 import java.util.ArrayList;
 
 /**
  * The main class for the CS410J Phone Bill Project.
  */
-public class Project1 {
+public class Project2 {
   /**
    * Main function. All the arguments from command are parsed here. The conditional if and else
    * statements help to put them apart.
@@ -25,10 +30,10 @@ public class Project1 {
     String startTime = "";
     String endDate = "";
     String endTime = "";
-
+    String textFile = "";
     //flag for print
     int flagPrint = 0;
-
+    int flagFile = 0;
    if (args.length == 0) {
       System.err.println("Missing command line arguments");
       System.exit(1);
@@ -39,6 +44,17 @@ public class Project1 {
           String action = arg.substring(1);
           if (action.equals("print")) {
             flagPrint = 1;
+
+          }else if(action.equals("textFile")){
+            flagFile = 1;
+            if (i+1 < args.length) {
+              textFile = args[i+1];
+            }
+            else {
+              System.err.print("Text file name is not given.");
+              System.exit(1);
+            }
+            i++;
           } else if (action.equals("README")) {
             String readme = "Name: Yan Li. Project 1: The PhoneBill and PhoneCall."
                     + "The assignment is designed to pass in arguments from the command line to record"
@@ -47,6 +63,9 @@ public class Project1 {
                     + "-print command prints the description of a phone call, while README command outputs the README.";
             System.out.println(readme);
             System.exit(0);
+          } else {
+            System.err.print("The command is not recognized.");
+            System.exit(1);
           }
         } else {
           if (args.length - i == 7) {
@@ -94,11 +113,43 @@ public class Project1 {
       PhoneCall call = new PhoneCall(caller1, callee1, startDate, startTime, endDate, endTime);
       ArrayList<PhoneCall> calls = new ArrayList<>();
       calls.add(call);
-      PhoneBill bill = new PhoneBill(customer1, calls);
+      PhoneBill phoneBill;
+     if (flagFile == 1) {
+        try {
+          TextParser textParser = new TextParser(textFile); // allocate the reader
+          phoneBill = (PhoneBill) textParser.parse();  //reading text file content into phone bill
+          String customerName = phoneBill.getCustomer();
+          if (!customerName.equals(customer1)) {
+            System.err.print("The customer name in the file is not equal to the given customer name.");
+            System.exit(1);
+          }
+          phoneBill.addPhoneCall(call);
+        } catch (ParserException err) {
+          String errMsg = err.getMessage();
+          if (!errMsg.equals("The file is empty")) {
+            System.err.print(err.getMessage());
+            System.exit(1);
+          }
+          phoneBill = new PhoneBill(customer1, calls);
+        }
+
+        TextDumper textDumper = new TextDumper(textFile); // writing phone bill to the file
+        try  {
+          textDumper.dump(phoneBill);
+        } catch (IOException err) {
+          System.err.print(err.getMessage());
+          System.exit(1);
+        }
+     } else {
+       phoneBill = new PhoneBill(customer1, calls);
+     }
+
+
       if (flagPrint == 1) {
-        System.out.println(bill.toString());
+        System.out.println(phoneBill.toString());
         System.out.println(call.toString());
       }
+
 
       /*
     for (String arg : args) {
@@ -182,7 +233,7 @@ public class Project1 {
    * @return 0 for malformed date format, 1 for correct date
    */
   private static int checkDate(String date) {
-    if (date.length() < 8) {
+    if (date.length() < 9) {
       return 0;
     }
     String splittedDate[] = date.split("/");
