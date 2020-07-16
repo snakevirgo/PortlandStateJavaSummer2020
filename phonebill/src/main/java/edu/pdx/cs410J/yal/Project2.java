@@ -31,12 +31,16 @@ public class Project2 {
     String endDate = "";
     String endTime = "";
     String textFile = "";
+
     //flag for print
     int flagPrint = 0;
     int flagFile = 0;
    if (args.length == 0) {
-      System.err.println("Missing command line arguments");
-      System.exit(1);
+     System.err.println("Missing command line arguments");
+     System.exit(1);
+   }else if(args.length < 0){
+     System.err.println("Unknown command line argument");
+     System.exit(1);
     } else {
       for (int i = 0; i < args.length; ++i) {
         String arg = args[i];
@@ -115,25 +119,9 @@ public class Project2 {
       calls.add(call);
       PhoneBill phoneBill;
      if (flagFile == 1) {
-        try {
-          TextParser textParser = new TextParser(textFile); // allocate the reader
-          phoneBill = (PhoneBill) textParser.parse();  //reading text file content into phone bill
-          String customerName = phoneBill.getCustomer();
-          if (!customerName.equals(customer1)) {
-            System.err.print("The customer name in the file is not equal to the given customer name.");
-            System.exit(1);
-          }
-          phoneBill.addPhoneCall(call);
-        } catch (ParserException err) {
-          String errMsg = err.getMessage();
-          if (!errMsg.equals("The file is empty")) {
-            System.err.print(err.getMessage());
-            System.exit(1);
-          }
-          phoneBill = new PhoneBill(customer1, calls);
-        }
 
-        TextDumper textDumper = new TextDumper(textFile); // writing phone bill to the file
+
+        /*TextDumper textDumper = new TextDumper(textFile); // writing phone bill to the file
         try  {
           textDumper.dump(phoneBill);
         } catch (IOException err) {
@@ -144,6 +132,60 @@ public class Project2 {
        phoneBill = new PhoneBill(customer1, calls);
      }
 
+         */
+          /*
+          try {
+            TextParser textParser = new TextParser(textFile); // allocate the reader
+            phoneBill = (PhoneBill) textParser.parse();  //reading text file content into phone bill
+            String customerName = phoneBill.getCustomer();
+            if (!customerName.equals(customer1)) {
+              System.err.print("The customer name in the file is not equal to the given customer name.");
+              System.exit(1);
+            }
+            phoneBill.addPhoneCall(call);
+          } catch (ParserException err) {
+            String errMsg = err.getMessage();
+            if (!errMsg.equals("The file is empty")) {
+              System.err.print(err.getMessage());
+              System.exit(1);
+            }
+            phoneBill = new PhoneBill(customer1, calls);
+          }*/
+
+
+      phoneBill = new PhoneBill(customer1, calls);
+
+      // phoneBill.addPhoneCall(call);
+        TextDumper textDumper = new TextDumper(textFile); // writing phone bill to the file
+
+        try  {
+          textDumper.dump(phoneBill);
+        } catch (IOException err) {
+          System.err.print(err.getMessage());
+          System.exit(1);
+        }
+     } else {
+       phoneBill = new PhoneBill(customer1, calls);
+     }
+
+      try {
+            TextParser textParser = new TextParser(textFile); // allocate the reader
+            phoneBill = (PhoneBill) textParser.parse();  //reading text file content into phone bill
+            String customerName = phoneBill.getCustomer();
+            if (!customerName.equals(customer1)) {
+              System.err.print("The customer name in the file is not equal to the given customer name.");
+              System.exit(1);
+            }
+            phoneBill.addPhoneCall(call);
+          } catch (ParserException err) {
+        String errMsg = err.getMessage();
+        if (!errMsg.equals("The file is empty")) {
+          System.err.print(err.getMessage());
+          System.exit(1);
+        }
+        phoneBill = new PhoneBill(customer1, calls);
+
+      }
 
       if (flagPrint == 1) {
         System.out.println(phoneBill.toString());

@@ -28,4 +28,6 @@ public class TextDumperTest {
            TestCase.assertEquals("Error when dumping file.", err.getMessage());
        }
     }
+
+
 }
