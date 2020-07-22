@@ -43,6 +43,7 @@ public class TextDumper implements PhoneBillDumper<AbstractPhoneBill> {
                if (splittedStartString.length != 2) {
                    throw new IOException("Malformatted Start Date Time");
                }
+
                String startDate = splittedStartString[0];
                String startTime = splittedStartString[1];
                bufferedWriter.write(startDate);
@@ -56,6 +57,7 @@ public class TextDumper implements PhoneBillDumper<AbstractPhoneBill> {
                    throw new IOException("Malformatted End Date Time");
                }
                String endDate = splittedEndString[0];
+
                bufferedWriter.write(endDate);
                bufferedWriter.newLine();
                String endTime = splittedEndString[1];

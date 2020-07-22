@@ -1,6 +1,7 @@
 package edu.pdx.cs410J.yal;
 
 import edu.pdx.cs410J.ParserException;
+import jdk.jshell.spi.ExecutionControlProvider;
 import org.w3c.dom.Text;
 
 import java.io.IOException;
@@ -74,37 +75,15 @@ public class Project2 {
         } else {
           if (args.length - i == 7) {
             customer1 = args[i];
+
             caller1 = args[i + 1];
-            if (checkPhoneNumber(caller1) == 0) {
-              System.err.println("Caller phone number is malformed.");
-              System.exit(1);
-            }
             callee1 = args[i + 2];
-            if (checkPhoneNumber(callee1) == 0) {
-              System.err.println("Callee phone number is malformed.");
-              System.exit(1);
-            }
+
             startDate = args[i + 3];
-            if (checkDate(startDate) == 0) {
-              System.err.println("Wrong start date format.");
-              System.exit(1);
-            }
             startTime = args[i + 4];
-            if (checkTime(startTime) == 0) {
-              System.err.println("Wrong start time format.");
-              System.exit(1);
-            }
 
             endDate = args[i + 5];
-            if (checkDate(endDate) == 0) {
-              System.err.println("Wrong end date format.");
-              System.exit(1);
-            }
             endTime = args[i + 6];
-            if (checkTime(endTime) == 0) {
-              System.err.println("Wrong end time format.");
-              System.exit(1);
-            }
 
               break;
           } else {
@@ -114,26 +93,21 @@ public class Project2 {
         }
       }
 
-      PhoneCall call = new PhoneCall(caller1, callee1, startDate, startTime, endDate, endTime);
+      PhoneCall call = null;
       ArrayList<PhoneCall> calls = new ArrayList<>();
-      calls.add(call);
-      PhoneBill phoneBill;
+      try {
+          call = new PhoneCall(caller1, callee1, startDate, startTime, endDate, endTime);
+          calls.add(call);
+      }
+       catch (Exception err) {
+          String errMsg = err.getMessage();
+          System.err.print(errMsg);
+          System.exit(1);
+       }
+
+      PhoneBill phoneBill = null;
      if (flagFile == 1) {
 
-
-        /*TextDumper textDumper = new TextDumper(textFile); // writing phone bill to the file
-        try  {
-          textDumper.dump(phoneBill);
-        } catch (IOException err) {
-          System.err.print(err.getMessage());
-          System.exit(1);
-        }
-     } else {
-       phoneBill = new PhoneBill(customer1, calls);
-     }
-
-         */
-          /*
           try {
             TextParser textParser = new TextParser(textFile); // allocate the reader
             phoneBill = (PhoneBill) textParser.parse();  //reading text file content into phone bill
@@ -142,18 +116,19 @@ public class Project2 {
               System.err.print("The customer name in the file is not equal to the given customer name.");
               System.exit(1);
             }
+
             phoneBill.addPhoneCall(call);
           } catch (ParserException err) {
             String errMsg = err.getMessage();
-            if (!errMsg.equals("The file is empty")) {
+            if (!errMsg.equals("The file is empty") && ! errMsg.equals("New File is created")) {
               System.err.print(err.getMessage());
               System.exit(1);
             }
             phoneBill = new PhoneBill(customer1, calls);
-          }*/
+          }
 
 
-      phoneBill = new PhoneBill(customer1, calls);
+        //  phoneBill = new PhoneBill(customer1, calls);
 
       // phoneBill.addPhoneCall(call);
         TextDumper textDumper = new TextDumper(textFile); // writing phone bill to the file
@@ -168,7 +143,7 @@ public class Project2 {
        phoneBill = new PhoneBill(customer1, calls);
      }
 
-      try {
+  /*    try {
             TextParser textParser = new TextParser(textFile); // allocate the reader
             phoneBill = (PhoneBill) textParser.parse();  //reading text file content into phone bill
             String customerName = phoneBill.getCustomer();
@@ -187,6 +162,8 @@ public class Project2 {
 
       }
 
+*/
+
       if (flagPrint == 1) {
         System.out.println(phoneBill.toString());
         System.out.println(call.toString());
@@ -198,7 +175,7 @@ public class Project2 {
       System.out.println(arg);
     }*/
 
-      System.exit(1);
+      System.exit(0);
 
     }
   }
@@ -208,7 +185,7 @@ public class Project2 {
    * @param phoneNumber
    * @return 0 for malformed phone number, 1 for correct phone number
    */
-  // "541-512-4564" splittedPhoneNUmber = ["541","512","4564"]
+  /*// "541-512-4564" splittedPhoneNUmber = ["541","512","4564"]
   private static int checkPhoneNumber(String phoneNumber) {
     if (phoneNumber.length() != 12) {
       return 0;
@@ -236,7 +213,7 @@ public class Project2 {
    */
   // "541-512-4564" ["541","512","4564"]
   // 1:1 19:31
-
+/*
   private static int checkTime(String time) {
     if (time.length() < 3 || time.length() > 5) {
       return 0;
@@ -274,6 +251,7 @@ public class Project2 {
    * @param date
    * @return 0 for malformed date format, 1 for correct date
    */
+/*
   private static int checkDate(String date) {
     if (date.length() < 9) {
       return 0;
@@ -306,4 +284,5 @@ public class Project2 {
     }
     return 1;
   }
+  */
 }
