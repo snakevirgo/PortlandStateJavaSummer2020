@@ -143,27 +143,6 @@ public class Project2 {
        phoneBill = new PhoneBill(customer1, calls);
      }
 
-  /*    try {
-            TextParser textParser = new TextParser(textFile); // allocate the reader
-            phoneBill = (PhoneBill) textParser.parse();  //reading text file content into phone bill
-            String customerName = phoneBill.getCustomer();
-            if (!customerName.equals(customer1)) {
-              System.err.print("The customer name in the file is not equal to the given customer name.");
-              System.exit(1);
-            }
-            phoneBill.addPhoneCall(call);
-          } catch (ParserException err) {
-        String errMsg = err.getMessage();
-        if (!errMsg.equals("The file is empty")) {
-          System.err.print(err.getMessage());
-          System.exit(1);
-        }
-        phoneBill = new PhoneBill(customer1, calls);
-
-      }
-
-*/
-
       if (flagPrint == 1) {
         System.out.println(phoneBill.toString());
         System.out.println(call.toString());
@@ -180,11 +159,11 @@ public class Project2 {
     }
   }
 
-  /**
-   * This private function will check the validity format of phone number.
-   * @param phoneNumber
-   * @return 0 for malformed phone number, 1 for correct phone number
-   */
+//  /**
+//   * This private function will check the validity format of phone number.
+//   * @param phoneNumber
+//   * @return 0 for malformed phone number, 1 for correct phone number
+//   */
   /*// "541-512-4564" splittedPhoneNUmber = ["541","512","4564"]
   private static int checkPhoneNumber(String phoneNumber) {
     if (phoneNumber.length() != 12) {
