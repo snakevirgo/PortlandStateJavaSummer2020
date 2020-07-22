@@ -61,7 +61,7 @@ public class Project2 {
             }
             i++;
           } else if (action.equals("README")) {
-            String readme = "Name: Yan Li. Project 1: The PhoneBill and PhoneCall."
+            String readme = "Name: Yan Li. Project 2: The PhoneBill and PhoneCall."
                     + "The assignment is designed to pass in arguments from the command line to record"
                     + "brief phone call records indicating the customer name, caller, callee and their timestamps"
                     + "Time stamps are in month-day-year. In addition, there are two options that are allowed: "
