@@ -8,19 +8,19 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 /**
- * Tests the functionality in the {@link Project2} main class.
+ * Tests the functionality in the {@link Project3} main class.
  */
-public class Project2IT extends InvokeMainTestCase {
+public class Project3IT extends InvokeMainTestCase {
 
    /**
-     * Invokes the main method of {@link Project2} with the given arguments.
+     * Invokes the main method of {@link Project3} with the given arguments.
      */
    /*
     private MainMethodResult invokeMain(String... args) {
         return invokeMain(mainClass, args);
     }
 */
-   private MainMethodResult invokeMain(String... args){return invokeMain( Project2.class, args);}
+   private MainMethodResult invokeMain(String... args){return invokeMain( Project3.class, args);}
     /**
      * Tests that invoking the main method with no arguments issues an error
      */
@@ -52,7 +52,7 @@ public class Project2IT extends InvokeMainTestCase {
      public void checkREADMETest(){
         MainMethodResult result = invokeMain( "-README");
        // assertThat(result.getExitCode(), equalTo(0));
-        assertThat(result.getTextWrittenToStandardOut(), containsString( "Name: Yan Li. Project 1: The PhoneBill and PhoneCall."
+        assertThat(result.getTextWrittenToStandardOut(), containsString( "Name: Yan Li. Project 3: The PhoneBill and PhoneCall."
                        + "The assignment is designed to pass in arguments from the command line to record"
                        + "brief phone call records indicating the customer name, caller, callee and their timestamps"
                        + "Time stamps are in month-day-year. In addition, there are two options that are allowed: "
@@ -64,7 +64,7 @@ public class Project2IT extends InvokeMainTestCase {
     public void checkREADMEOverrideTest(){
         MainMethodResult result = invokeMain( "-README", "-print", "apple", "530-344-3345", "503-222-33333", "1/12/2020", "12:12", "1/12/2020", "12:32");
         // assertThat(result.getExitCode(), equalTo(0));
-        assertThat(result.getTextWrittenToStandardOut(), containsString( "Name: Yan Li. Project 1: The PhoneBill and PhoneCall."
+        assertThat(result.getTextWrittenToStandardOut(), containsString( "Name: Yan Li. Project 3: The PhoneBill and PhoneCall."
                 + "The assignment is designed to pass in arguments from the command line to record"
                 + "brief phone call records indicating the customer name, caller, callee and their timestamps"
                 + "Time stamps are in month-day-year. In addition, there are two options that are allowed: "
