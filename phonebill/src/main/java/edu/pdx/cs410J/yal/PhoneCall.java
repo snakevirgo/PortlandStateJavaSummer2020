@@ -13,8 +13,12 @@ public class PhoneCall extends AbstractPhoneCall implements Comparable<PhoneCall
   private Date startDateTime;
   private Date endDateTime;
 
-  /**
+  /**PhoneCall checks in all the arguments of the phone call,
+   * and also, converting String to Date.
+   *
    * @param callee
+   *
+   * Return 0 for success or 1 for fail.
    */
   public PhoneCall(String caller, String callee, String startDate, String startTime, String endDate, String endTime) throws Exception {
 

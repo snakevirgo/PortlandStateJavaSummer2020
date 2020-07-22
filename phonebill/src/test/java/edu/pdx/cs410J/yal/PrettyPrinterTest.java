@@ -7,7 +7,8 @@ import java.util.ArrayList;
 /**
  * Unit tests for the {@link PrettyPrinter} class.
  *
- * You'll need to update these unit tests as you build out you program.
+ * This pretty print test tests to see if the phone bill can be dumped
+ * and printed out in the DateFormat SHORT as expected.
  */
 public class PrettyPrinterTest {
      @Test

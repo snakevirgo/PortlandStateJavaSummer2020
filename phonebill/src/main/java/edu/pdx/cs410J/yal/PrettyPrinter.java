@@ -25,7 +25,7 @@ public class PrettyPrinter implements PhoneBillDumper<AbstractPhoneBill> {
         int l = phoneCalls.size();
         StringBuilder content = new StringBuilder(customerName + " has " + l + " phone calls \n");
         for (PhoneCall phoneCall: phoneCalls) {
-            String phoneC = phoneCall.toString() + " in duration " + phoneCall.Duration() + " minutes" + "\n";
+            String phoneC = phoneCall.toString() + " in duration of " + phoneCall.Duration() + " minutes" + "\n";
             content.append(phoneC);
         }
 
