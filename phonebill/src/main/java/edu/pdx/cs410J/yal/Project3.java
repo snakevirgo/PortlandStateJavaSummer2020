@@ -32,10 +32,12 @@ public class Project3 {
     String endDate = "";
     String endTime = "";
     String textFile = "";
+    String prettyFileName = "";
 
     //flag for print
     int flagPrint = 0;
     int flagFile = 0;
+    int flagPretty = 0;
    if (args.length == 0) {
      System.err.println("Missing command line arguments");
      System.exit(1);
@@ -68,22 +70,35 @@ public class Project3 {
                     + "-print command prints the description of a phone call, while README command outputs the README.";
             System.out.println(readme);
             System.exit(0);
-          } else {
+          }
+          else if(action.equals("pretty")) {
+            flagPretty = 1;
+            if (i+1 < args.length) {
+                prettyFileName = args[i+1];
+                i++;
+            }
+            else {
+                System.err.print("pretty file is not given.");
+                System.exit(1);
+            }
+          }
+
+          else {
             System.err.print("The command is not recognized.");
             System.exit(1);
           }
         } else {
-          if (args.length - i == 7) {
+          if (args.length - i == 9) {
             customer1 = args[i];
 
             caller1 = args[i + 1];
             callee1 = args[i + 2];
 
             startDate = args[i + 3];
-            startTime = args[i + 4];
+            startTime = args[i + 4] + " " + args[i+5];
 
-            endDate = args[i + 5];
-            endTime = args[i + 6];
+            endDate = args[i + 6];
+            endTime = args[i + 7] + " " + args[i+8];
 
               break;
           } else {
@@ -148,6 +163,15 @@ public class Project3 {
         System.out.println(call.toString());
       }
 
+      if (flagPretty == 1){
+          PrettyPrinter pretty = new PrettyPrinter(prettyFileName);
+          try {
+              pretty.dump(phoneBill);
+          }catch(IOException e){
+              System.err.println(e.getMessage());
+              System.exit(1);
+          }
+      }
 
       /*
     for (String arg : args) {

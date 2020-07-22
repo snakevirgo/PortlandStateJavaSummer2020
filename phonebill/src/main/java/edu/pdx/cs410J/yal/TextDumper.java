@@ -5,7 +5,9 @@ import edu.pdx.cs410J.AbstractPhoneCall;
 import edu.pdx.cs410J.PhoneBillDumper;
 import edu.pdx.cs410J.yal.PhoneCall;
 import java.io.*;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 //import static org.hamcrest.CoreMatchers.*;
 //import static org.hamcrest.MatcherAssert.assertThat;
@@ -38,30 +40,27 @@ public class TextDumper implements PhoneBillDumper<AbstractPhoneBill> {
                bufferedWriter.write(callee);
                bufferedWriter.newLine();
 
-               String StartString = phoneCall.getStartTimeString();
-               String splittedStartString[] = StartString.split(" ");
-               if (splittedStartString.length != 2) {
-                   throw new IOException("Malformatted Start Date Time");
-               }
 
-               String startDate = splittedStartString[0];
-               String startTime = splittedStartString[1];
-               bufferedWriter.write(startDate);
-               bufferedWriter.newLine();
-               bufferedWriter.write(startTime);
+               Date Start = phoneCall.getStartDateTime();
+               SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+               SimpleDateFormat tf = new SimpleDateFormat("hh:mm aa");
+               String StartDate = df.format(Start);
+               String StartTime = tf.format(Start);
+
+               bufferedWriter.write(StartDate);
                bufferedWriter.newLine();
 
-               String EndString = phoneCall.getEndTimeString();
-               String splittedEndString[] = EndString.split(" ");
-               if (splittedEndString.length != 2) {
-                   throw new IOException("Malformatted End Date Time");
-               }
-               String endDate = splittedEndString[0];
-
-               bufferedWriter.write(endDate);
+               bufferedWriter.write(StartTime);
                bufferedWriter.newLine();
-               String endTime = splittedEndString[1];
-               bufferedWriter.write(endTime);
+
+               Date End = phoneCall.getEndDateTime();
+               String EndDate = df.format(End);
+               String EndTime = tf.format(End);
+
+               bufferedWriter.write(EndDate);
+               bufferedWriter.newLine();
+
+               bufferedWriter.write(EndTime);
                bufferedWriter.newLine();
            }
            bufferedWriter.close();

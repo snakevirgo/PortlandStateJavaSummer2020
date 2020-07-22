@@ -87,12 +87,13 @@ public class TextParser implements PhoneBillParser<AbstractPhoneBill> {
                      else
                       if (l == 2) {
                          File d = new File(dir[0]);
-                         d.mkdir();
+                         if(!d.exists())
+                         {d.mkdir();}
                      }
                      File file = new File(this.file_name);
-                     boolean isCreated = file.createNewFile();
-
-
+                      if (!file.exists()) {
+                          boolean isCreated = file.createNewFile();
+                      }
                  } catch (IOException er) {
                      throw new ParserException(er.getMessage());
                  }
