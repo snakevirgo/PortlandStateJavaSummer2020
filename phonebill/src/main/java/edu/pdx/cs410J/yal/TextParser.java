@@ -46,27 +46,27 @@ public class TextParser implements PhoneBillParser<AbstractPhoneBill> {
 
                  line = bufferedReader.readLine();
                  if (line == null || line.equals("")) {
-                     throw new ParserException("The file is malformed.");
+                     throw new ParserException("The file is malformatted with invalid start date.");
                  }
                  String startDate = line;
 
 
                  line = bufferedReader.readLine();
                  if (line == null || line.equals("")) {
-                     throw new ParserException("The file is malformed.");
+                     throw new ParserException("The file is malformatted with invalid start time.");
                  }
                  String startTime = line;
 
 
                  line = bufferedReader.readLine();
                  if (line == null || line.equals("")) {
-                     throw new ParserException("The file is malformed.");
+                     throw new ParserException("The file is malformatted with invlid end date .");
                  }
                  String endDate = line;
 
                  line = bufferedReader.readLine();
                  if (line == null || line.equals("")) {
-                     throw new ParserException("The file is malformed.");
+                     throw new ParserException("The file is malformed with invalid end time.");
                  }
                  String endTime = line;
 

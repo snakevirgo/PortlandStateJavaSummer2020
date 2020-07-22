@@ -30,21 +30,27 @@ public class PhoneCallTest {
     }
 
   }
-//
+
 //  @Test
 //  public void forProject1ItIsOkayIfGetStartTimeReturnsNull() {
 //    PhoneCall call = new PhoneCall(null);
 //    assertThat(call.getStartTime(), is(nullValue()));
 //  }
 
-//  validates phone numbers and dates
-//  @Test
-//  public void getCallerTest(){
-//    PhoneCall number1 = new PhoneCall("503-222-3333", "503-111-1111", "01/15/2020", "12:30", "1/20/2020", "13:30");
-//    assertThat(number1.getCaller(), equalTo("503-222-3333"));
-//
-//  }
-//
+  //validates phone numbers and dates
+  @Test
+  public void getCallerTest(){
+    PhoneCall number1;
+    try {
+      number1 = new PhoneCall("503-222-3333", "503-111-1111", "01/15/2020", "12:30", "1/20/2020", "13:30");
+      assertThat(number1.getCaller(), equalTo("503-222-3333"));
+    }catch(Exception e)
+    {
+      System.err.println(e.getMessage());
+    }
+
+  }
+
   @Test
   public void getCalleeTest(){
     PhoneCall number2;
@@ -78,15 +84,15 @@ public class PhoneCallTest {
     }
   }
 
-  @Test
-  public void malformedDate(){
-    PhoneCall number2;
-    try {
-      number2 = new PhoneCall("503-222-3333", "503-111-1111", "01-10/2020", "12:30", "01/10/2020", "13:30");
-    }catch(Exception e){
-      System.err.println("It should be here");
-    }
-   }
+//  @Test
+//  public void malformedDate(){
+//    PhoneCall number2;
+//    try {
+//      number2 = new PhoneCall("503-222-3333", "503-111-1111", "01-10/2020", "12:30", "01/10/2020", "13:30");
+//    }catch(Exception e){
+//      System.err.println("It should be here");
+//    }
+//   }
 
 
 }
