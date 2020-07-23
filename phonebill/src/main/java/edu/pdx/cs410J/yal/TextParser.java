@@ -75,37 +75,37 @@ public class TextParser implements PhoneBillParser<AbstractPhoneBill> {
                  line = bufferedReader.readLine();
              }
              return this.phoneBill;
-         } catch (Exception err) {
-             String msg = err.getMessage();
-             if (msg.contains("The system cannot find the")) {
-                 try {
-                     String dir[] = this.file_name.split("/");
-                     int l = dir.length;
-                     if (l == 0) {
-                         throw new ParserException("File name was not given");
-                     }
-                     else
-                      if (l == 2) {
-                         File d = new File(dir[0]);
-                         if(!d.exists())
-                         {d.mkdir();}
-                     }
-                     File file = new File(this.file_name);
-                      if (!file.exists()) {
-                          boolean isCreated = file.createNewFile();
-                      }
-                 } catch (IOException er) {
-                     throw new ParserException(er.getMessage());
-                 }
-                 throw  new ParserException("New File is created");
-             } else {
-                 throw new ParserException("The file might be malformed.");
-             }
-         }
-     }
+              }
+         catch (Exception err) {
+            File file = new File(this.file_name);
+            if (!file.exists()) {
+                try {
+                    String dir[] = this.file_name.split("/");
+                    int l = dir.length;
+                    if (l == 2) {
+                        File d = new File(dir[0]);
+                        if (!d.exists()) {
+                            if (d.mkdir()) {
+                                System.out.println(dir[0] + " is created");
+                            } else {
+                                System.err.println(dir[0] + " cannot be created");
+                            }
+                        }
+                    }
+                    file.createNewFile();
+
+                } catch (IOException er) {
+                    throw new ParserException(er.getMessage());
+                }
+                throw  new ParserException("New File is created");
+
+            }
+            else {
+                throw new ParserException(err.getMessage());
+            }
+        }
+    }
 }
-
-
 
 //no text file: create new a one. -> dump the information
 //existing one: parse the content -> array -> append information what you want to dump to array -> dump it
