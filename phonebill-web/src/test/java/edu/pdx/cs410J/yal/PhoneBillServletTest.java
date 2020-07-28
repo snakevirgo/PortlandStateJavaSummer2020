@@ -1,5 +1,6 @@
 package edu.pdx.cs410J.yal;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
 
@@ -22,22 +23,23 @@ import static org.mockito.Mockito.*;
 public class PhoneBillServletTest {
 
   @Test
-  public void initiallyServletContainsNoDictionaryEntries() throws ServletException, IOException {
+  public void requestWithNoCustomerReturnMissingParameter() throws ServletException, IOException {
     PhoneBillServlet servlet = new PhoneBillServlet();
 
     HttpServletRequest request = mock(HttpServletRequest.class);
     HttpServletResponse response = mock(HttpServletResponse.class);
-    PrintWriter pw = mock(PrintWriter.class);
-
-    when(response.getWriter()).thenReturn(pw);
+//    PrintWriter pw = mock(PrintWriter.class);
+//
+//    when(response.getWriter()).thenReturn(pw);
 
     servlet.doGet(request, response);
 
-    int expectedWords = 0;
-    verify(pw).println(Messages.formatWordCount(expectedWords));
-    verify(response).setStatus(HttpServletResponse.SC_OK);
+   // int expectedWords = 0;
+    //verify(pw).println(Messages.missingRequiredParameter("customer"));
+    verify(response).sendError(HttpServletResponse.SC_PRECONDITION_FAILED);
   }
 
+  @Ignore
   @Test
   public void addOneWordToDictionary() throws ServletException, IOException {
     PhoneBillServlet servlet = new PhoneBillServlet();

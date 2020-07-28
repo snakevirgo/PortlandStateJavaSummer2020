@@ -1,6 +1,7 @@
 package edu.pdx.cs410J.yal;
 
 import com.google.common.annotations.VisibleForTesting;
+import org.codehaus.mojo.animal_sniffer.IgnoreJRERequirement;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -19,7 +20,7 @@ import java.util.Map;
  */
 public class PhoneBillServlet extends HttpServlet
 {
-    static final String WORD_PARAMETER = "word";
+    static final String CUSTOMER_PARAMETER = "customer";
     static final String DEFINITION_PARAMETER = "definition";
 
     private final Map<String, String> dictionary = new HashMap<>();
@@ -35,12 +36,9 @@ public class PhoneBillServlet extends HttpServlet
     {
         response.setContentType( "text/plain" );
 
-        String word = getParameter( WORD_PARAMETER, request );
-        if (word != null) {
-            writeDefinition(word, response);
-
-        } else {
-            writeAllDictionaryEntries(response);
+        String word = getParameter( CUSTOMER_PARAMETER, request );
+        if (word == null) {
+            missingRequiredParameter(response, CUSTOMER_PARAMETER);
         }
     }
 
@@ -49,14 +47,15 @@ public class PhoneBillServlet extends HttpServlet
      * "word" and "definition" request parameters.  It writes the dictionary
      * entry to the HTTP response.
      */
+
     @Override
     protected void doPost( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException
     {
-        response.setContentType( "text/plain" );
+        response.setContentType( "customer" );
 
-        String word = getParameter(WORD_PARAMETER, request );
+        String word = getParameter(CUSTOMER_PARAMETER, request );
         if (word == null) {
-            missingRequiredParameter(response, WORD_PARAMETER);
+            missingRequiredParameter(response, CUSTOMER_PARAMETER);
             return;
         }
 
