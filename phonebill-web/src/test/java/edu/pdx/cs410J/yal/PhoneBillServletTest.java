@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
+import static edu.pdx.cs410J.yal.Messages.missingRequiredParameter;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.equalTo;
@@ -36,7 +37,7 @@ public class PhoneBillServletTest {
 
    // int expectedWords = 0;
     //verify(pw).println(Messages.missingRequiredParameter("customer"));
-    verify(response).sendError(HttpServletResponse.SC_PRECONDITION_FAILED);
+    verify(response).sendError(HttpServletResponse.SC_PRECONDITION_FAILED, missingRequiredParameter("customer"));
   }
 
   @Ignore
@@ -59,7 +60,7 @@ public class PhoneBillServletTest {
 
     when(response.getWriter()).thenReturn(pw);
 
-    servlet.doPost(request, response);
+//    servlet.doPost(request, response);
 
     assertThat(stringWriter.toString(), containsString(Messages.definedWordAs(word, definition) ));
 
@@ -69,7 +70,7 @@ public class PhoneBillServletTest {
 
     assertThat(statusCode.getValue(), equalTo(HttpServletResponse.SC_OK));
 
-    assertThat(servlet.getDefinition(word), equalTo(definition));
+//    assertThat(servlet.getDefinition(word), equalTo(definition));
   }
 
 }

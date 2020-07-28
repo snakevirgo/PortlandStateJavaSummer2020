@@ -42,6 +42,11 @@ public class PhoneBillRestClient extends HttpRequestHelper
     /**
      * Returns the definition for the given word
      */
+    public String getPhoneCalls(String customerName) throws IOException {
+        Response response = get(this.url, Map.of("customer", customerName));
+        throwExceptionIfNotOkayHttpStatus(response);
+        return response.getContent();
+    }
     public String getDefinition(String word) throws IOException {
       Response response = get(this.url, Map.of("word", word));
       throwExceptionIfNotOkayHttpStatus(response);
