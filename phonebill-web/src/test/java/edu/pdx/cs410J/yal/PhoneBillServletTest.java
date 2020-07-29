@@ -37,7 +37,7 @@ public class PhoneBillServletTest {
 
    // int expectedWords = 0;
     //verify(pw).println(Messages.missingRequiredParameter("customer"));
-    verify(response).sendError(HttpServletResponse.SC_PRECONDITION_FAILED, missingRequiredParameter("customer"));
+    verify(response).sendError(HttpServletResponse.SC_PRECONDITION_FAILED, Messages.missingRequiredParameter("customer"));
   }
 
   @Ignore
