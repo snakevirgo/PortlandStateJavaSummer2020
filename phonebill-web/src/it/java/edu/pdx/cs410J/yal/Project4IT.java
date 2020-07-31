@@ -73,7 +73,7 @@ public class Project4IT extends InvokeMainTestCase {
     }
     @Test
     public void checkForPrint() {
-        MainMethodResult result = invokeMain( Project4.class,"-print", "apple", "511-111-1111","511-818-4444", "03/01/2020", "1:01", "am", "01/01/2021", "1:12", "am");
+        MainMethodResult result = invokeMain( Project4.class,"-print", "apple", "511-111-1111","511-818-4444", "03/01/2020", "1:01", "am", "05/01/2021", "1:12", "am");
         assertThat(result.getExitCode(), CoreMatchers.equalTo(0));
     }
 

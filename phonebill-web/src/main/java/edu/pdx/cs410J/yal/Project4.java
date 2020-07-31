@@ -115,6 +115,7 @@ public class Project4 {
                         if (flagHostName == 1) {
                             flagPost = 1;
                         }
+
                         break;
                     } else {
                         System.err.print("The number of arguments is not valid.");
@@ -153,12 +154,12 @@ public class Project4 {
                 System.err.println(err.getMessage());
                 System.exit(1);
             }
-        } else if (flagSearch == 1) {
+        } else if (flagSearch == 1 && flagHostName == 1) {
             if (args.length < 12) {
                 System.err.println("Search needs name, start and end");
                 System.exit(1);
             }
-            if (flagHostName == 1 && flagSearch == 0) {
+
                 // doing search here
                 PhoneBillRestClient client = new PhoneBillRestClient(hostName, port);
                 try {
@@ -169,7 +170,7 @@ public class Project4 {
                     System.err.println(err.getMessage());
                     System.exit(1);
                 }
-            }
+
 
         }
         PhoneBill phoneBill;
