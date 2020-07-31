@@ -74,6 +74,44 @@ public class PhoneBillServletTest {
     verify(response).sendError(HttpServletResponse.SC_PRECONDITION_FAILED, "Invalid caller phone number input!");
   }
 
+    @Test
+    public void doPostCustomerFailedDate()  throws  IOException{
+        PhoneBillServlet servlet = new PhoneBillServlet();
+
+        HttpServletRequest request = mock(HttpServletRequest.class);
+        when(request.getParameter("customer")).thenReturn("testServer");
+        when(request.getParameter("callerNumber")).thenReturn("541-111-1111");
+        when(request.getParameter("calleeNumber")).thenReturn("541-478-4777");
+        when(request.getParameter("start")).thenReturn("01/01/220 1:12 am");
+        when(request.getParameter("end")).thenReturn("01/02/2020 1:12 pm");
+        HttpServletResponse response = mock(HttpServletResponse.class);
+        try {
+            servlet.doPost(request, response);
+        } catch (ServletException err) {
+            System.err.println("It shouldn't be here");
+        }
+        verify(response).sendError(HttpServletResponse.SC_PRECONDITION_FAILED, "Invalid start date time input!");
+    }
+    @Test
+    public void doPostCustomerFailedDate2()  throws  IOException{
+        PhoneBillServlet servlet = new PhoneBillServlet();
+
+        HttpServletRequest request = mock(HttpServletRequest.class);
+        when(request.getParameter("customer")).thenReturn("testServer");
+        when(request.getParameter("callerNumber")).thenReturn("541-111-1111");
+        when(request.getParameter("calleeNumber")).thenReturn("541-478-4777");
+        when(request.getParameter("start")).thenReturn("01/01/2020 1:12 am");
+        when(request.getParameter("end")).thenReturn("01/02/220 1:12 pm");
+        HttpServletResponse response = mock(HttpServletResponse.class);
+        try {
+            servlet.doPost(request, response);
+        } catch (ServletException err) {
+            System.err.println("It shouldn't be here");
+        }
+        verify(response).sendError(HttpServletResponse.SC_PRECONDITION_FAILED, "Invalid end date time input!");
+    }
+
+
   @Test
   public void doGetCustomer() throws  IOException{
     PhoneBillServlet servlet = new PhoneBillServlet();
