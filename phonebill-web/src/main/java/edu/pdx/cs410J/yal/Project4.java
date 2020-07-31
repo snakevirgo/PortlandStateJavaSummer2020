@@ -112,7 +112,9 @@ public class Project4 {
 
                         endDate = args[i + 6];
                         endTime = args[i + 7] + " " + args[i + 8];
-                        flagPost = 1;
+                        if (flagHostName == 1) {
+                            flagPost = 1;
+                        }
                         break;
                     } else {
                         System.err.print("The number of arguments is not valid.");
@@ -142,7 +144,7 @@ public class Project4 {
                 System.err.println("The host name or the post is missing");
                 System.exit(1);
             }
-        } else if (flagPost == 1 && flagHostName == 1 && flagSearch == 0) {
+        } else if (flagPost == 1 ) {
 //             PhoneBillRestClient client = new PhoneBillRestClient(hostName, port);
             PhoneBillRestClient client = new PhoneBillRestClient(hostName, port);
             try {
@@ -156,17 +158,37 @@ public class Project4 {
                 System.err.println("Search needs name, start and end");
                 System.exit(1);
             }
-            // doing search here
-            PhoneBillRestClient client = new PhoneBillRestClient(hostName, port);
+            if (flagHostName == 1 && flagSearch == 0) {
+                // doing search here
+                PhoneBillRestClient client = new PhoneBillRestClient(hostName, port);
+                try {
+                    String res = client.searchPhoneCalls(customer1, startDate + " " + startTime, endDate + " " + endTime);
+                    System.out.println(res);
+                    System.exit(0);
+                } catch (IOException | PhoneBillRestClient.PhoneBillRestException err) {
+                    System.err.println(err.getMessage());
+                    System.exit(1);
+                }
+            }
+
+        }
+        PhoneBill phoneBill;
+        PhoneCall call;
+        if (flagPrint == 1) {
             try {
-                String res = client.searchPhoneCalls(customer1, startDate + " " + startTime, endDate + " " + endTime);
-                System.out.println(res);
-                System.exit(0);
-            } catch (IOException | PhoneBillRestClient.PhoneBillRestException err) {
+                call = new PhoneCall(caller1, callee1, startDate, startTime, endDate, endTime);
+                ArrayList<PhoneCall> calls = new ArrayList<>();
+                calls.add(call);
+                phoneBill = new PhoneBill(customer1, calls);
+                System.out.println(phoneBill.toString());
+                System.out.println(call.toString());
+            }
+            catch (Exception err) {
                 System.err.println(err.getMessage());
                 System.exit(1);
             }
         }
+
         System.exit(0);
     }
       /*
