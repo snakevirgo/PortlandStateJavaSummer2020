@@ -39,25 +39,25 @@ public class PhoneBillRestClientIT {
     Map<String, String> dictionary = client.getAllDictionaryEntries();
     assertThat(dictionary.size(), equalTo(0));
   }
-  @Ignore
-  @Test
-  public void test2DefineOneWord() throws IOException {
-    PhoneBillRestClient client = newPhoneBillRestClient();
-    String testWord = "TEST WORD";
-    String testDefinition = "TEST DEFINITION";
-    client.addDictionaryEntry(testWord, testDefinition);
-
-    String definition = client.getDefinition(testWord);
-    assertThat(definition, equalTo(testDefinition));
-  }
-
-  @Ignore
-  @Test
-  public void test4MissingRequiredParameterReturnsPreconditionFailed() throws IOException {
-    PhoneBillRestClient client = newPhoneBillRestClient();
-    HttpRequestHelper.Response response = client.postToMyURL(Map.of());
-    assertThat(response.getContent(), containsString(Messages.missingRequiredParameter("word")));
-    assertThat(response.getCode(), equalTo(HttpURLConnection.HTTP_PRECON_FAILED));
-  }
+//  @Ignore
+//  @Test
+//  public void test2DefineOneWord() throws IOException {
+//    PhoneBillRestClient client = newPhoneBillRestClient();
+//    String testWord = "TEST WORD";
+//    String testDefinition = "TEST DEFINITION";
+//    client.addDictionaryEntry(testWord, testDefinition);
+//
+//    String definition = client.getDefinition(testWord);
+//    assertThat(definition, equalTo(testDefinition));
+//  }
+//
+//  @Ignore
+//  @Test
+//  public void test4MissingRequiredParameterReturnsPreconditionFailed() throws IOException {
+//    PhoneBillRestClient client = newPhoneBillRestClient();
+//    HttpRequestHelper.Response response = client.postToMyURL(Map.of());
+//    assertThat(response.getContent(), containsString(Messages.missingRequiredParameter("word")));
+//    assertThat(response.getCode(), equalTo(HttpURLConnection.HTTP_PRECON_FAILED));
+//  }
 
 }

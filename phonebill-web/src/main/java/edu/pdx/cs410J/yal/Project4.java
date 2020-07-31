@@ -2,6 +2,7 @@ package edu.pdx.cs410J.yal;
 
 import edu.pdx.cs410J.ParserException;
 import edu.pdx.cs410J.web.HttpRequestHelper;
+import org.apache.groovy.json.internal.IO;
 
 import java.io.IOException;
 import java.io.PrintStream;
@@ -33,6 +34,7 @@ public class Project4 {
         int port = 0;
         //flag for print
         int flagPrint = 0;
+        int flagPost = 0;
         int flagHostName = 0;
         int flagSearch = 0;
         int flagPort = 0;
@@ -51,7 +53,7 @@ public class Project4 {
                     if (action.equals("print")) {
                         flagPrint = 1;
                     } else if (action.equals("README")) {
-                        String readme = "Name: Yan Li. Project 3: The PhoneBill and PhoneCall."
+                        String readme = "Name: Yan Li. Project 4: The PhoneBill and PhoneCall."
                                 + "The assignment is designed to pass in arguments from the command line to record"
                                 + "brief phone call records indicating the customer name, caller, callee and their timestamps"
                                 + "Time stamps are in month-day-year. In addition, there are two options that are allowed: "
@@ -65,7 +67,7 @@ public class Project4 {
                         }
                         flagHostName = 1;
 
-                        hostName = args[i+1];
+                        hostName = args[i + 1];
                         i++;
                     } else if (action.equals("port")) {
                         if (args.length - i < 1) {
@@ -73,7 +75,7 @@ public class Project4 {
                             System.exit(1);
                         }
                         try {
-                            port = Integer.parseInt(args[i+1]);
+                            port = Integer.parseInt(args[i + 1]);
                         } catch (NumberFormatException err) {
                             System.err.print("The port is not an integer");
                             System.exit(1);
@@ -87,11 +89,19 @@ public class Project4 {
                         System.exit(1);
                     }
                 } else {
-                    if (args.length - i == 1 ) {
+                    if (args.length - i == 1) {
                         customer1 = arg;
                         printPhoneCall = 1;
+                    } else if (flagSearch == 1 && args.length - i == 7) {
+                        customer1 = args[i];
+                        startDate = args[i + 1];
+                        startTime = args[i + 2] + " " + args[i + 3];
+
+                        endDate = args[i + 4];
+                        endTime = args[i + 5] + " " + args[i + 6];
+                        break;
                     }
-                    else if (args.length - i == 9) {
+                else if (args.length - i == 9) {
                         customer1 = args[i];
 
                         caller1 = args[i + 1];
@@ -102,6 +112,7 @@ public class Project4 {
 
                         endDate = args[i + 6];
                         endTime = args[i + 7] + " " + args[i + 8];
+                        flagPost = 1;
                         break;
                     } else {
                         System.err.print("The number of arguments is not valid.");
@@ -116,51 +127,42 @@ public class Project4 {
             System.exit(1);
         }
 
-         if (printPhoneCall == 1) {
-             if (flagHostName == 1 ){
-            PhoneBillRestClient client = new PhoneBillRestClient(hostName, port);
+        if (printPhoneCall == 1) {
+            if (flagHostName == 1) {
+                PhoneBillRestClient client = new PhoneBillRestClient(hostName, port);
 
+                try {
+                    String response = client.getPhoneCalls(customer1);
+                    System.out.println(response);
+                } catch (IOException err) {
+                    System.err.println(err.getMessage());
+                    System.exit(1);
+                }
+            } else {
+                System.err.println("The host name or the post is missing");
+                System.exit(1);
+            }
+        } else if (flagPost == 1 && flagHostName == 1 && flagSearch == 0) {
+//             PhoneBillRestClient client = new PhoneBillRestClient(hostName, port);
+            PhoneBillRestClient client = new PhoneBillRestClient(hostName, port);
             try {
-                String response = client.getPhoneCalls(customer1);
-                System.out.println(response);
+                client.postNewPhoneCall(customer1, caller1, callee1, startDate + " " + startTime, endDate + " " + endTime);
             } catch (IOException err) {
                 System.err.println(err.getMessage());
                 System.exit(1);
             }
-             } else {
-                 System.err.println("The host name or the post is missing");
-                 System.exit(1);
-             }
-        } else {
-
-             PhoneCall call = null;
-             ArrayList<PhoneCall> calls = new ArrayList<>();
-             try {
-                 call = new PhoneCall(caller1, callee1, startDate, startTime, endDate, endTime);
-                 calls.add(call);
-             } catch (Exception err) {
-                 String errMsg = err.getMessage();
-                 System.err.print(errMsg);
-                 System.exit(1);
-             }
-
-             PhoneBill phoneBill = new PhoneBill(customer1, calls);
-             if (flagHostName == 1) {
-                 PhoneBillRestClient client = new PhoneBillRestClient(hostName, port);
-
-                 try {
-                     String response = client.getPhoneCalls(customer1);
-                     System.out.println(response);
-                 } catch (IOException err) {
-                     System.err.println(err.getMessage());
-                     System.exit(1);
-                 }
-             }
-             if (flagPrint == 1) {
-                 System.out.println(phoneBill.toString());
-                 System.out.println(call.toString());
-             }
-         }
+        } else if (flagSearch == 1 && args.length >= 12 ) {
+            // doing search here
+            PhoneBillRestClient client = new PhoneBillRestClient(hostName, port);
+            try {
+                String res = client.searchPhoneCalls(customer1, startDate + " " + startTime, endDate + " " + endTime);
+                System.out.println(res);
+                System.exit(0);
+            } catch (IOException err) {
+                System.err.println(err.getMessage());
+                System.exit(1);
+            }
+        }
     }
       /*
     for (String arg : args) {

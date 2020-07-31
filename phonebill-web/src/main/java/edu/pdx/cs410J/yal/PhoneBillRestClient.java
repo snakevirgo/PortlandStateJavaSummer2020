@@ -47,17 +47,22 @@ public class PhoneBillRestClient extends HttpRequestHelper
         throwExceptionIfNotOkayHttpStatus(response);
         return response.getContent();
     }
-    public String getDefinition(String word) throws IOException {
-      Response response = get(this.url, Map.of("word", word));
-      throwExceptionIfNotOkayHttpStatus(response);
-      String content = response.getContent();
-      return Messages.parseDictionaryEntry(content).getValue();
+
+    public String searchPhoneCalls(String customerName, String start, String end) throws IOException {
+        Response response = get(this.url, Map.of("customer", customerName, "start", start, "end", end));
+        throwExceptionIfNotOkayHttpStatus(response);
+        return response.getContent();
     }
 
-    public void addDictionaryEntry(String word, String definition) throws IOException {
-      Response response = postToMyURL(Map.of("word", word, "definition", definition));
-      throwExceptionIfNotOkayHttpStatus(response);
+    public void postNewPhoneCall(String customerName, String callerNumber, String calleeNumber, String start, String end) throws IOException {
+        Response response = postToMyURL(Map.of("customer", customerName, "callerNumber", callerNumber, "calleeNumber", calleeNumber, "start", start, "end", end));
+        throwExceptionIfNotOkayHttpStatus(response);
     }
+
+//    public void addDictionaryEntry(String word, String definition) throws IOException {
+//      Response response = postToMyURL(Map.of("word", word, "definition", definition));
+//      throwExceptionIfNotOkayHttpStatus(response);
+//    }
 
     @VisibleForTesting
     Response postToMyURL(Map<String, String> dictionaryEntries) throws IOException {
