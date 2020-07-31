@@ -12,21 +12,37 @@ public class PhoneBill extends AbstractPhoneBill<PhoneCall> {
     private ArrayList<PhoneCall> calls;
 
     //customer constructor
+
+    /**
+     *
+     * @param customer
+     * @param calls
+     */
     public PhoneBill(String customer, ArrayList<PhoneCall> calls) {
         this.customer = customer;
         this.calls = calls;
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public String getCustomer() {
         return customer;
     }
 
+    /**
+     * @param phoneCall
+     */
     @Override
     public void addPhoneCall(PhoneCall phoneCall) {
         calls.add(phoneCall);
     }
 
+    /**
+     * @return
+     */
     @Override
     public Collection<PhoneCall> getPhoneCalls() {
         return calls;

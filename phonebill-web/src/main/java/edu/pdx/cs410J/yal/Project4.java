@@ -127,14 +127,14 @@ public class Project4 {
             System.exit(1);
         }
 
-        if (printPhoneCall == 1) {
+        if (printPhoneCall == 1 && flagSearch == 0) {
             if (flagHostName == 1) {
                 PhoneBillRestClient client = new PhoneBillRestClient(hostName, port);
 
                 try {
                     String response = client.getPhoneCalls(customer1);
                     System.out.println(response);
-                } catch (IOException err) {
+                } catch (IOException | PhoneBillRestClient.PhoneBillRestException  err) {
                     System.err.println(err.getMessage());
                     System.exit(1);
                 }
@@ -147,22 +147,27 @@ public class Project4 {
             PhoneBillRestClient client = new PhoneBillRestClient(hostName, port);
             try {
                 client.postNewPhoneCall(customer1, caller1, callee1, startDate + " " + startTime, endDate + " " + endTime);
-            } catch (IOException err) {
+            } catch (IOException | PhoneBillRestClient.PhoneBillRestException  err) {
                 System.err.println(err.getMessage());
                 System.exit(1);
             }
-        } else if (flagSearch == 1 && args.length >= 12 ) {
+        } else if (flagSearch == 1) {
+            if (args.length < 12) {
+                System.err.println("Search needs name, start and end");
+                System.exit(1);
+            }
             // doing search here
             PhoneBillRestClient client = new PhoneBillRestClient(hostName, port);
             try {
                 String res = client.searchPhoneCalls(customer1, startDate + " " + startTime, endDate + " " + endTime);
                 System.out.println(res);
                 System.exit(0);
-            } catch (IOException err) {
+            } catch (IOException | PhoneBillRestClient.PhoneBillRestException err) {
                 System.err.println(err.getMessage());
                 System.exit(1);
             }
         }
+        System.exit(0);
     }
       /*
     for (String arg : args) {

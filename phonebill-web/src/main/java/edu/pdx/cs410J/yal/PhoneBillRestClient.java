@@ -31,13 +31,13 @@ public class PhoneBillRestClient extends HttpRequestHelper
         this.url = String.format( "http://%s:%d/%s/%s", hostName, port, WEB_APP, SERVLET );
     }
 
-    /**
-     * Returns all dictionary entries from the server
-     */
-    public Map<String, String> getAllDictionaryEntries() throws IOException {
-      Response response = get(this.url, Map.of());
-      return Messages.parseDictionary(response.getContent());
-    }
+//    /**
+//     * Returns all dictionary entries from the server
+//     */
+//    public Map<String, String> getAllDictionaryEntries() throws IOException {
+//      Response response = get(this.url, Map.of());
+//      return Messages.parseDictionary(response.getContent());
+//    }
 
     /**
      * Returns the definition for the given word
@@ -48,12 +48,29 @@ public class PhoneBillRestClient extends HttpRequestHelper
         return response.getContent();
     }
 
+    /**
+     *
+     * @param customerName
+     * @param start
+     * @param end
+     * @return
+     * @throws IOException
+     */
     public String searchPhoneCalls(String customerName, String start, String end) throws IOException {
         Response response = get(this.url, Map.of("customer", customerName, "start", start, "end", end));
         throwExceptionIfNotOkayHttpStatus(response);
         return response.getContent();
     }
 
+    /**
+     *
+     * @param customerName
+     * @param callerNumber
+     * @param calleeNumber
+     * @param start
+     * @param end
+     * @throws IOException
+     */
     public void postNewPhoneCall(String customerName, String callerNumber, String calleeNumber, String start, String end) throws IOException {
         Response response = postToMyURL(Map.of("customer", customerName, "callerNumber", callerNumber, "calleeNumber", calleeNumber, "start", start, "end", end));
         throwExceptionIfNotOkayHttpStatus(response);
@@ -68,11 +85,17 @@ public class PhoneBillRestClient extends HttpRequestHelper
     Response postToMyURL(Map<String, String> dictionaryEntries) throws IOException {
       return post(this.url, dictionaryEntries);
     }
+//
+//    public void removeAllDictionaryEntries() throws IOException {
+//      Response response = delete(this.url, Map.of());
+//      throwExceptionIfNotOkayHttpStatus(response);
+//    }
 
-    public void removeAllDictionaryEntries() throws IOException {
-      Response response = delete(this.url, Map.of());
-      throwExceptionIfNotOkayHttpStatus(response);
-    }
+    /**
+     *
+     * @param response
+     * @return
+     */
 
     private Response throwExceptionIfNotOkayHttpStatus(Response response) {
       int code = response.getCode();
@@ -81,6 +104,10 @@ public class PhoneBillRestClient extends HttpRequestHelper
       }
       return response;
     }
+
+    /**
+     *
+     */
 
     @VisibleForTesting
     class PhoneBillRestException extends RuntimeException {

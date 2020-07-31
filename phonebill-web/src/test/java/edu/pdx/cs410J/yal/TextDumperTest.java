@@ -26,6 +26,38 @@ public class TextDumperTest {
             System.err.println(e.getMessage());
         }
     }
+    @Test
+    public void TestDumperFailed() {
+        String writer = "test";
+        TextDumper dumper =  new TextDumper(writer);
+        String customerName = "Customer";
+        ArrayList<PhoneCall> phoneCalls = new ArrayList<>();
+        PhoneCall number2;
+        try {
+            number2 = new PhoneCall("503-222-3333", "503-111-1111", "01/10/202", "12:30", "01/10/2020", "13:30");
+            phoneCalls.add(number2);
+            PhoneBill bill = new PhoneBill(customerName,phoneCalls);
+            dumper.dump(bill);
+        }catch(Exception e){
+            System.err.println(e.getMessage());
+        }
+    }
+    @Test
+    public void TestDumperFailed1() {
+        String writer = "test";
+        TextDumper dumper =  new TextDumper(writer);
+        String customerName = "Customer";
+        ArrayList<PhoneCall> phoneCalls = new ArrayList<>();
+        PhoneCall number2;
+        try {
+            number2 = new PhoneCall("503-222-333", "503-111-1111", "01/10/202", "12:30", "01/10/2020", "13:30");
+            phoneCalls.add(number2);
+            PhoneBill bill = new PhoneBill(customerName,phoneCalls);
+            dumper.dump(bill);
+        }catch(Exception e){
+            System.err.println(e.getMessage());
+        }
+    }
 
 
 }

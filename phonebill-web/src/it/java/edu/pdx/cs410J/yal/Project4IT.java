@@ -15,6 +15,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.equalTo;
 
+
 /**
  * Tests the {@link Project4} class by invoking its main method with various arguments
  */
@@ -53,17 +54,37 @@ public class Project4IT extends InvokeMainTestCase {
         assertThat(result.getTextWrittenToStandardError(), containsString("The number of arguments is not valid."));
     }
 
-//    @Test
-//    public void checkCallerPhoneNumberTest() {
-//        MainMethodResult result = invokeMain( Project4.class,"apple", "503-222-33333", "503-333-2222", "1-12-2020", "1:30", "am", "1-12-2020", "1:50", "am");
-//        assertThat(result.getTextWrittenToStandardError(), containsString("Invalid caller phone number input!"));
-//    }
-//
-//    @Test
-//    public void checkCalleePhoneNumberTest() {
-//        MainMethodResult result = invokeMain( Project4.class,"aplle", "503-222-3333", "503-333-22d22", "1-12-2020", "1:30", "pm", "1-12-2020", "1:50", "pm");
-//        assertThat(result.getTextWrittenToStandardError(), CoreMatchers.containsString("Invalid callee phone number input!"));
-//    }
+    @Test
+    public void checkCallerPhoneNumberTest() {
+        MainMethodResult result = invokeMain( Project4.class,"-host", "localhost", "-port", "8080" ,"apple", "503-222-3333", "503-333-2222", "1/12/2020", "1:30", "am", "1/12/2020", "1:50", "am");
+        assertThat(result.getExitCode(), CoreMatchers.equalTo(0));
+    }
+
+    @Test
+    public void checkForPortError() {
+        MainMethodResult result = invokeMain( Project4.class,"-host", "localhost", "-port", "800" , "apple");
+        assertThat(result.getExitCode(), CoreMatchers.equalTo(1));
+    }
+
+    @Test
+    public void checkForTheSearchMissingStartAndEnd() {
+        MainMethodResult result = invokeMain( Project4.class,"-host", "localhost", "-port", "8080" ,"-search", "apple");
+        assertThat(result.getExitCode(), CoreMatchers.equalTo(1));
+    }
+
+    @Test
+    public void checkForTheSearchSuccessfully() {
+        MainMethodResult result = invokeMain( Project4.class,"-host", "localhost", "-port", "8080" ,"-search", "apple", "03/01/2020", "1:01", "am", "01/01/2021", "1:12", "am");
+        assertThat(result.getExitCode(), CoreMatchers.equalTo(0));
+    }
+
+    @Test
+    public void checkForTheSearchFailed() {
+        MainMethodResult result = invokeMain( Project4.class,"-host", "localhost", "-port", "8080" ,"-search", "apple", "03/0/2020", "1:01", "am", "01/01/2021", "1:12", "am");
+        assertThat(result.getExitCode(), CoreMatchers.equalTo(1));
+    }
+
+
     @Test
     public void checkREADMETest(){
         MainMethodResult result = invokeMain( Project4.class,"-README");

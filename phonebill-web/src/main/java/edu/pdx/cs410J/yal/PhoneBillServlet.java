@@ -49,6 +49,9 @@ public class PhoneBillServlet extends HttpServlet {
             missingRequiredParameter(response, CUSTOMER_PARAMETER);
             return;
         }
+//        }else{
+//            response.sendError(HttpServletResponse.SC_NOT_FOUND, Messages.noPhoneBillForCustomer(customerName));
+//        }
         String start = getParameter(START_PARAMETER, request);
         String end = getParameter(END_PARAMETER, request);
         if (start != null && end == null) {
@@ -251,24 +254,6 @@ public class PhoneBillServlet extends HttpServlet {
         response.setStatus(HttpServletResponse.SC_OK);
     }
 
-    /**
-     * Handles an HTTP DELETE request by removing all dictionary entries.  This
-     * behavior is exposed for testing purposes only.  It's probably not
-     * something that you'd want a real application to expose.
-     */
-//    @Override
-//    protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//        response.setContentType("text/plain");
-//
-//        this.dictionary.clear();
-//
-//        PrintWriter pw = response.getWriter();
-//        pw.println(Messages.allDictionaryEntriesDeleted());
-//        pw.flush();
-//
-//        response.setStatus(HttpServletResponse.SC_OK);
-//
-//    }
 
     /**
      * Writes an error message about a missing parameter to the HTTP response.
@@ -281,43 +266,8 @@ public class PhoneBillServlet extends HttpServlet {
         response.sendError(HttpServletResponse.SC_PRECONDITION_FAILED, message);
     }
 
-    /**
-     * Writes the definition of the given word to the HTTP response.
-     *
-     * The text of the message is formatted with
-     * {@link Messages#formatDictionaryEntry(String, String)}
-     */
-//    private void writeDefinition(String word, HttpServletResponse response) throws IOException {
-//        String definition = this.dictionary.get(word);
-//
-//        if (definition == null) {
-//            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-//
-//        } else {
-//            PrintWriter pw = response.getWriter();
-//            pw.println(Messages.formatDictionaryEntry(word, definition));
-//
-//            pw.flush();
-//
-//            response.setStatus(HttpServletResponse.SC_OK);
-//        }
-//    }
 
-    /**
-     * Writes all of the dictionary entries to the HTTP response.
-     *
-     * The text of the message is formatted with
-     * {@link Messages#formatDictionaryEntry(String, String)}
-     */
-//    private void writeAllDictionaryEntries(HttpServletResponse response ) throws IOException
-//    {
-//        PrintWriter pw = response.getWriter();
-//        Messages.formatDictionaryEntries(pw, dictionary);
-//
-//        pw.flush();
-//
-//        response.setStatus( HttpServletResponse.SC_OK );
-//    }
+
 
     /**
      * Returns the value of the HTTP request parameter with the given name.
@@ -335,9 +285,6 @@ public class PhoneBillServlet extends HttpServlet {
         }
     }
 
-//    @VisibleForTesting
-//    String getDefinition(String word) {
-//        return this.dictionary.get(word);
-//    }
+
 
 }

@@ -26,19 +26,39 @@ public class PhoneBillRestClientIT {
     int port = Integer.parseInt(PORT);
     return new PhoneBillRestClient(HOSTNAME, port);
   }
-  @Ignore
+
   @Test
+
   public void test0RemoveAllDictionaryEntries() throws IOException {
     PhoneBillRestClient client = newPhoneBillRestClient();
-    client.removeAllDictionaryEntries();
+//    client.removeAllDictionaryEntries();
   }
-  @Ignore
+
   @Test
-  public void test1EmptyServerContainsNoDictionaryEntries() throws IOException {
+  public void TestAddNewPhoneCall() throws  IOException{
     PhoneBillRestClient client = newPhoneBillRestClient();
-    Map<String, String> dictionary = client.getAllDictionaryEntries();
-    assertThat(dictionary.size(), equalTo(0));
+    client.postNewPhoneCall("clientTest", "541-111-1111", "541-454-4111", "2/20/2020 1:00 pm", "03/21/2020 1:10 am");
   }
+
+  @Test
+  public void TestGetPhoneCall () throws IOException {
+    PhoneBillRestClient client = newPhoneBillRestClient();
+    client.getPhoneCalls("clientTest");
+  }
+
+  @Test
+  public void TestSearch() throws IOException {
+    PhoneBillRestClient client = newPhoneBillRestClient();
+    client.searchPhoneCalls("clientTest", "1/1/2020 1:00 pm", "2/1/2020 2:00 pm");
+
+  }
+
+//  @Test
+//  public void test1EmptyServerContainsNoDictionaryEntries() throws IOException {
+//    PhoneBillRestClient client = newPhoneBillRestClient();
+//    Map<String, String> dictionary = client.getAllDictionaryEntries();
+//    assertThat(dictionary.size(), equalTo(0));
+//  }
 //  @Ignore
 //  @Test
 //  public void test2DefineOneWord() throws IOException {
