@@ -76,6 +76,18 @@ public class Project4IT extends InvokeMainTestCase {
         MainMethodResult result = invokeMain( Project4.class,"-print", "apple", "511-111-1111","511-818-4444", "03/01/2020", "1:01", "am", "05/01/2021", "1:12", "am");
         assertThat(result.getExitCode(), CoreMatchers.equalTo(0));
     }
+    @Test
+    public void checkForPrintAndPost() {
+        MainMethodResult result = invokeMain( Project4.class,"-host", "localhost", "-port", "8080", "-print", "apple", "511-111-1111","511-818-4444", "03/01/2020", "1:01", "am", "05/01/2021", "1:12", "am");
+        assertThat(result.getExitCode(), CoreMatchers.equalTo(0));
+    }
+
+    @Test
+    public void checkForPrintAndPostFailed() {
+        MainMethodResult result = invokeMain( Project4.class,"-host", "localhost", "-port", "8080", "-print", "apple", "51-111-1111","511-818-4444", "03/01/2020", "1:01", "am", "05/01/2021", "1:12", "am");
+        assertThat(result.getExitCode(), CoreMatchers.equalTo(1));
+    }
+
 
     @Test
     public void checkForPrintFalied() {
