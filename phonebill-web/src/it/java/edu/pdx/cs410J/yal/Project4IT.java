@@ -144,6 +144,12 @@ public class Project4IT extends InvokeMainTestCase {
         assertThat(result.getTextWrittenToStandardError(), CoreMatchers.containsString("The number of arguments is not valid"));
         assertThat(result.getExitCode(), CoreMatchers.equalTo(1));
     }
+    @Test
+    public void checkTheValidNumberOfArgumentsEntered1i1() {
+        MainMethodResult result = invokeMain(Project4.class,"apple", "530-344-3340", "apple", "530-344-3340", "apple", "530-344-3340","apple", "530-344-3340", "apple", "530-344-3340",  "apple", "530-344-3340", "12");
+        assertThat(result.getTextWrittenToStandardError(), CoreMatchers.containsString("The number of arguments is not valid"));
+        assertThat(result.getExitCode(), CoreMatchers.equalTo(1));
+    }
 
 //    @Test
 //    public void checkTheValidityOfCallerPhoneNumber() {

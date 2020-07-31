@@ -81,7 +81,6 @@ public class PhoneBillRestClient extends HttpRequestHelper
 //      throwExceptionIfNotOkayHttpStatus(response);
 //    }
 
-    @VisibleForTesting
     Response postToMyURL(Map<String, String> dictionaryEntries) throws IOException {
       return post(this.url, dictionaryEntries);
     }
@@ -96,7 +95,7 @@ public class PhoneBillRestClient extends HttpRequestHelper
      * @param response
      * @return
      */
-
+    @VisibleForTesting
     private Response throwExceptionIfNotOkayHttpStatus(Response response) {
       int code = response.getCode();
       if (code != HTTP_OK) {
@@ -108,9 +107,8 @@ public class PhoneBillRestClient extends HttpRequestHelper
     /**
      *
      */
-
     @VisibleForTesting
-    class PhoneBillRestException extends RuntimeException {
+   class PhoneBillRestException extends RuntimeException {
       PhoneBillRestException(int httpStatusCode) {
         super("Got an HTTP Status Code of " + httpStatusCode);
       }

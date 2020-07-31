@@ -211,6 +211,10 @@ public class Project4 {
         }
     }
 
+    /**
+     *
+     * @param message
+     */
     private static void error(String message) {
         PrintStream err = System.err;
         err.println("** " + message);

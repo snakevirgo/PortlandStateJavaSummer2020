@@ -7,6 +7,9 @@ import edu.pdx.cs410J.PhoneBillParser;
 import java.io.*;
 import java.util.ArrayList;
 
+/**
+ *
+ */
 public class TextParser implements PhoneBillParser<AbstractPhoneBill> {
      private String file_name;
      private PhoneBill phoneBill;
@@ -16,6 +19,11 @@ public class TextParser implements PhoneBillParser<AbstractPhoneBill> {
 
      }
 
+    /**
+     *
+     * @return
+     * @throws ParserException
+     */
      public AbstractPhoneBill parse() throws ParserException {
          InputStream read_File;
          BufferedReader bufferedReader;

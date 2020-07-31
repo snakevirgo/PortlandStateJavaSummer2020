@@ -4,6 +4,7 @@ import edu.pdx.cs410J.web.HttpRequestHelper;
 import org.junit.FixMethodOrder;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import org.junit.runners.MethodSorters;
 
 import java.io.IOException;
@@ -38,8 +39,23 @@ public class PhoneBillRestClientIT {
   public void TestAddNewPhoneCall() throws  IOException{
     PhoneBillRestClient client = newPhoneBillRestClient();
     client.postNewPhoneCall("clientTest", "541-111-1111", "541-454-4111", "2/20/2020 1:00 pm", "03/21/2020 1:10 am");
-  }
 
+  }
+    @Test(expected=PhoneBillRestClient.PhoneBillRestException.class)
+    public void TestAddNewPhoneCallFailed() throws  IOException{
+        PhoneBillRestClient client = newPhoneBillRestClient();
+        client.postNewPhoneCall("clientTest", "541-11-1111", "541-454-4111", "2/20/2020 1:00 pm", "03/21/2020 1:10 am");
+  }
+    @Test(expected=PhoneBillRestClient.PhoneBillRestException.class)
+    public void TestAddNewPhoneCallFailed2() throws  IOException{
+        PhoneBillRestClient client = newPhoneBillRestClient();
+        client.postNewPhoneCall("clientTest", "541-111-1111", "541-454-4111", "2/20/020 1:00 pm", "03/21/2020 1:10 am");
+    }
+
+//@Test
+//public void getURL() {
+//    HttpRequestHelper.Response response = postToMyURL(Map.of("customer", customerName, "callerNumber", callerNumber, "calleeNumber", calleeNumber, "start", start, "end", end));
+//}
   @Test
   public void TestGetPhoneCall () throws IOException {
     PhoneBillRestClient client = newPhoneBillRestClient();

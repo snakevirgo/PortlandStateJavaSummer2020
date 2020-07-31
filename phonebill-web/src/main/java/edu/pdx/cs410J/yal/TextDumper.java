@@ -11,6 +11,9 @@ import java.util.Date;
 //import static org.hamcrest.CoreMatchers.*;
 //import static org.hamcrest.MatcherAssert.assertThat;
 
+/**
+ *
+ */
 public class TextDumper implements PhoneBillDumper<AbstractPhoneBill> {
     private String file_Name;
     private PhoneBill phoneBill;
@@ -18,6 +21,11 @@ public class TextDumper implements PhoneBillDumper<AbstractPhoneBill> {
         this.file_Name = file_Name;
    }
 
+    /**
+     *
+     * @param var1
+     * @throws IOException
+     */
     public void dump(AbstractPhoneBill var1) throws IOException {
         this.phoneBill = (PhoneBill) var1;
         BufferedWriter bufferedWriter;
