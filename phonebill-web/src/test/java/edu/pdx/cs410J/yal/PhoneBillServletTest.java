@@ -1,8 +1,6 @@
 package edu.pdx.cs410J.yal;
 
-import org.junit.Ignore;
 import org.junit.Test;
-import org.mockito.ArgumentCaptor;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -11,10 +9,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
-import static edu.pdx.cs410J.yal.Messages.missingRequiredParameter;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.containsString;
-import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.*;
 import static org.mockito.Mockito.*;
 
 /**
@@ -37,6 +33,193 @@ public class PhoneBillServletTest {
     verify(response).sendError(HttpServletResponse.SC_PRECONDITION_FAILED, Messages.missingRequiredParameter("customer"));
   }
 
+//  @Test
+//  public void addPhoneCallToBill() throws ServletException, IOException {
+//    PhoneBillServlet servlet = new PhoneBillServlet();
+//
+//    String customer = "customer";
+//    String callerPhonenumber = "503-123-2222";
+//    String calleePhonenumber = "534-111-1111";
+//    String start = "01/01/2020 1:12 am";
+//    String end = "01/02/2020 1:12 pm";
+//
+//
+//    HttpServletRequest request = mock(HttpServletRequest.class);
+//    when(request.getParameter("customer")).thenReturn(customer);
+//    when(request.getParameter("callerNumber")).thenReturn(callerPhonenumber);
+//    when(request.getParameter("calleeNumber")).thenReturn(calleePhonenumber);
+//    when(request.getParameter("start")).thenReturn(start);
+//    when(request.getParameter("end")).thenReturn(end);
+//
+//
+//    HttpServletResponse response = mock(HttpServletResponse.class);
+//    PrintWriter pw = mock(PrintWriter.class);
+//    when(response.getWriter()).thenReturn(pw);
+//
+//    servlet.doPost(request, response);
+//    //verify(pw,times(0).println(any(String.class));
+//    verify(response).setStatus(HttpServletResponse.SC_OK);
+
+//    PhoneBill phoneBill = servlet.getPhoneBill();
+//    //assertThat(phoneBill, notNullValue());
+//    //assertThat(phoneBill, equalTo(customer));
+//
+//    PhoneCall phoneCall = phoneBill.getPhoneCalls().iterator().next();
+//    assertThat(phoneCall.getCaller(), equalTo(callerPhonenumber));
+//    assertThat(phoneCall.getCallee(),equalTo(calleePhonenumber));
+//    assertThat(phoneCall.getCaller(), equalTo(start));
+//    assertThat(phoneCall.getCaller(), equalTo(end));
+  //}
+    @Test
+    public void addPhoneCallToBillNullCustomer() throws ServletException, IOException {
+        PhoneBillServlet servlet = new PhoneBillServlet();
+
+        String customer = null;
+        String callerPhonenumber = "503-123-2222";
+        String calleePhonenumber = "534-111-1111";
+        String start = "01/01/2020 1:12 am";
+        String end = "01/02/2020 1:12 pm";
+
+
+        HttpServletRequest request = mock(HttpServletRequest.class);
+        when(request.getParameter("customer")).thenReturn(customer);
+        when(request.getParameter("callerNumber")).thenReturn(callerPhonenumber);
+        when(request.getParameter("calleeNumber")).thenReturn(calleePhonenumber);
+        when(request.getParameter("start")).thenReturn(start);
+        when(request.getParameter("end")).thenReturn(end);
+
+
+        HttpServletResponse response = mock(HttpServletResponse.class);
+        PrintWriter pw = mock(PrintWriter.class);
+        when(response.getWriter()).thenReturn(pw);
+
+        servlet.doPost(request, response);
+        //verify(pw,times(0).println(any(String.class));
+        verify(response).sendError(HttpServletResponse.SC_PRECONDITION_FAILED, "The required parameter \"customer\" is missing");
+
+//    PhoneBill phoneBill = servlet.getPhoneBill();
+//    //assertThat(phoneBill, notNullValue());
+//    //assertThat(phoneBill, equalTo(customer));
+//
+//    PhoneCall phoneCall = phoneBill.getPhoneCalls().iterator().next();
+//    assertThat(phoneCall.getCaller(), equalTo(callerPhonenumber));
+//    assertThat(phoneCall.getCallee(),equalTo(calleePhonenumber));
+//    assertThat(phoneCall.getCaller(), equalTo(start));
+//    assertThat(phoneCall.getCaller(), equalTo(end));
+    }
+
+
+  @Test
+    public void addPhoneCallToBillNullcallerPhonenumber() throws ServletException, IOException {
+        PhoneBillServlet servlet = new PhoneBillServlet();
+
+        String customer = "customer";
+        String callerPhonenumber = null;
+        String calleePhonenumber = "534-111-1111";
+        String start = "01/01/2020 1:12 am";
+        String end = "01/02/2020 1:12 pm";
+
+
+        HttpServletRequest request = mock(HttpServletRequest.class);
+        when(request.getParameter("customer")).thenReturn(customer);
+        when(request.getParameter("callerNumber")).thenReturn(callerPhonenumber);
+        when(request.getParameter("calleeNumber")).thenReturn(calleePhonenumber);
+        when(request.getParameter("start")).thenReturn(start);
+        when(request.getParameter("end")).thenReturn(end);
+
+
+        HttpServletResponse response = mock(HttpServletResponse.class);
+        PrintWriter pw = mock(PrintWriter.class);
+        when(response.getWriter()).thenReturn(pw);
+
+        servlet.doPost(request, response);
+        //verify(pw,times(0).println(any(String.class));
+        verify(response).sendError(HttpServletResponse.SC_PRECONDITION_FAILED, "The required parameter \"callerNumber\" is missing");
+}
+
+ @Test
+    public void addPhoneCallToBillNullcalleePhonenumber() throws ServletException, IOException {
+        PhoneBillServlet servlet = new PhoneBillServlet();
+
+        String customer = "customer";
+        String callerPhonenumber = "503-123-2222";
+        String calleePhonenumber = null;
+        String start = "01/01/2020 1:12 am";
+        String end = "01/02/2020 1:12 pm";
+
+
+        HttpServletRequest request = mock(HttpServletRequest.class);
+        when(request.getParameter("customer")).thenReturn(customer);
+        when(request.getParameter("callerNumber")).thenReturn(callerPhonenumber);
+        when(request.getParameter("calleeNumber")).thenReturn(calleePhonenumber);
+        when(request.getParameter("start")).thenReturn(start);
+        when(request.getParameter("end")).thenReturn(end);
+
+
+        HttpServletResponse response = mock(HttpServletResponse.class);
+        PrintWriter pw = mock(PrintWriter.class);
+        when(response.getWriter()).thenReturn(pw);
+
+        servlet.doPost(request, response);
+        //verify(pw,times(0).println(any(String.class));
+        verify(response).sendError(HttpServletResponse.SC_PRECONDITION_FAILED, "The required parameter \"calleeNumber\" is missing");
+}
+
+ @Test
+    public void addPhoneCallToBillNullStart() throws ServletException, IOException {
+        PhoneBillServlet servlet = new PhoneBillServlet();
+
+        String customer = "customer";
+        String callerPhonenumber = "503-123-2222";
+        String calleePhonenumber = "534-111-1111";
+        String start = null;
+        String end = "01/02/2020 1:12 pm";
+
+
+        HttpServletRequest request = mock(HttpServletRequest.class);
+        when(request.getParameter("customer")).thenReturn(customer);
+        when(request.getParameter("callerNumber")).thenReturn(callerPhonenumber);
+        when(request.getParameter("calleeNumber")).thenReturn(calleePhonenumber);
+        when(request.getParameter("start")).thenReturn(start);
+        when(request.getParameter("end")).thenReturn(end);
+
+
+        HttpServletResponse response = mock(HttpServletResponse.class);
+        PrintWriter pw = mock(PrintWriter.class);
+        when(response.getWriter()).thenReturn(pw);
+
+        servlet.doPost(request, response);
+        //verify(pw,times(0).println(any(String.class));
+        verify(response).sendError(HttpServletResponse.SC_PRECONDITION_FAILED, "The required parameter \"start\" is missing");
+}
+
+    @Test
+    public void addPhoneCallToBillNullEnd() throws ServletException, IOException {
+        PhoneBillServlet servlet = new PhoneBillServlet();
+
+        String customer = "customer";
+        String callerPhonenumber = "503-123-2222";
+        String calleePhonenumber = "534-111-1111";
+        String start = "01/01/2020 1:12 am";
+        String end = null;
+
+
+        HttpServletRequest request = mock(HttpServletRequest.class);
+        when(request.getParameter("customer")).thenReturn(customer);
+        when(request.getParameter("callerNumber")).thenReturn(callerPhonenumber);
+        when(request.getParameter("calleeNumber")).thenReturn(calleePhonenumber);
+        when(request.getParameter("start")).thenReturn(start);
+        when(request.getParameter("end")).thenReturn(end);
+
+
+        HttpServletResponse response = mock(HttpServletResponse.class);
+        PrintWriter pw = mock(PrintWriter.class);
+        when(response.getWriter()).thenReturn(pw);
+
+        servlet.doPost(request, response);
+        //verify(pw,times(0).println(any(String.class));
+        verify(response).sendError(HttpServletResponse.SC_PRECONDITION_FAILED, "The required parameter \"end\" is missing");
+    }
   @Test
   public void doPostCustomer()  throws  IOException{
     PhoneBillServlet servlet = new PhoneBillServlet();

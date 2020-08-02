@@ -1,9 +1,6 @@
 package edu.pdx.cs410J.yal;
 
-import com.google.common.annotations.VisibleForTesting;
 import edu.pdx.cs410J.ParserException;
-import org.codehaus.mojo.animal_sniffer.IgnoreJRERequirement;
-import org.w3c.dom.Text;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -31,7 +28,7 @@ public class PhoneBillServlet extends HttpServlet {
     static final String START_PARAMETER = "start";
     static final String END_PARAMETER = "end";
 
-    private final Map<String, String> dictionary = new HashMap<>();
+    private final Map<String, PhoneBill> phoneBills = new HashMap<>();
 
     /**
      * Handles an HTTP GET request from a client by writing the definition of the
@@ -284,7 +281,16 @@ public class PhoneBillServlet extends HttpServlet {
             return value;
         }
     }
+/*
+    PhoneBill getPhoneBill(){
+        //return getPhoneBill().getCustomer();
+        PhoneBill phoneBill= phoneBill.getCustomer;
+    }
+    /*(String customer, ArrayList<PhoneCall>){
+        return this.getPhoneBill(customer);
+    }
 
+     */
 
 
 }
